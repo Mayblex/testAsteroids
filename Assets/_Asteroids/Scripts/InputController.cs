@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Scripts
 {
+    [RequireComponent(typeof(IInputHandler))]
+
     public class InputController : MonoBehaviour
     {
-        private IInput _input;
+        private IInputHandler _inputHandler;
         private PlayerInput _playerInput;
 
         private void Awake()
@@ -14,12 +15,7 @@ namespace Scripts
             _playerInput = new PlayerInput();
             _playerInput.Enable();
             
-            _input = GetComponent<IInput>();
-
-            if (_input == null)
-            {
-                throw new Exception($"There is no IInput component on the object: {gameObject.name}");
-            }
+            _inputHandler = GetComponent<IInputHandler>();
         }
 
         private void Update()
@@ -42,24 +38,24 @@ namespace Scripts
 
         private void OnDefaultAtackPerformed(InputAction.CallbackContext obj)
         {
-            _input.DefaultAtack();
+            _inputHandler.DefaultAtack();
         }
 
         private void OnSpecialAtackPerformed(InputAction.CallbackContext obj)
         {
-            
+            _inputHandler.SpecialAtack();
         }
 
         private void ReadMove()
         {
-            var position = _playerInput.Gameplay.MoveForward.ReadValue<float>();
-            _input.MoveForward(position);
+            var input = _playerInput.Gameplay.MoveForward.ReadValue<float>();
+            _inputHandler.MoveForward(input);
         }
 
         private void ReadRotation()
         {
-            var rotation = _playerInput.Gameplay.Turn.ReadValue<float>();
-            _input.Turn(rotation);
+            var input = _playerInput.Gameplay.Turn.ReadValue<float>();
+            _inputHandler.Turn(input);
         }
     }
 }

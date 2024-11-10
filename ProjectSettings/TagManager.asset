@@ -18,13 +18,13 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Border
+  - EnemyBullet
+  - Bullet
+  - Laser
+  - Ship
+  - FO
+  - Asteroid
   - 
   - 
   - 

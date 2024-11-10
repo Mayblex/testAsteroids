@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts
 {
@@ -18,12 +17,11 @@ namespace Scripts
             Destroy(gameObject, _lifeTime);
         }
         
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Asteroid") || other.gameObject.CompareTag("FragmentAsteroid"))
+            if (other.TryGetComponent<IDamageable>(out IDamageable recipient))
             {
-                Debug.Log("collision");
-                Destroy(other.gameObject);
+                recipient.TakeDamage();
                 Destroy(gameObject);
             }
         }

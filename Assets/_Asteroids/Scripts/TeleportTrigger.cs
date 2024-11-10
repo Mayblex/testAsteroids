@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts
 {
@@ -31,12 +30,14 @@ namespace Scripts
             Vector3 exitPosition = _exitPosition;
             float additionDistance = 0f;
 
-            if (other.gameObject.CompareTag("Ship"))
+            if (other.GetComponent<Ship>())
                 additionDistance = 2f;
-            if (other.gameObject.CompareTag("Asteroid"))
+            if (other.GetComponent<Asteroid>())
                 additionDistance = 3f;
-            if (other.gameObject.CompareTag("FragmentAsteroid"))
+            if (other.GetComponent<FragmentAsteroid>())
                 additionDistance = 1.5f;
+            if (other.GetComponent<FO>()) 
+                additionDistance = 2.5f;
 
             switch (_border)
             {

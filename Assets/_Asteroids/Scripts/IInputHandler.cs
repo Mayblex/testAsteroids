@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Scripts
+﻿namespace Scripts
 {
-    public interface IInput
+    public interface IInputHandler
     {
         void MoveForward(float directionForward);
         void Turn(float rotationZ);

@@ -2,17 +2,17 @@
 
 namespace Scripts
 {
-    [RequireComponent(typeof(CharacterController))]
-    public class Ship : MonoBehaviour, IInput
+    [RequireComponent(typeof(Rigidbody))]
+    public class Ship : MonoBehaviour, IInputHandler
     {
         [SerializeField] private GameObject _bulletPrefab;
-        [SerializeField] private Transform _target;
+        [SerializeField] private GameObject _laser;
         
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
+        [SerializeField] private float _lifeTimeLaser = 0.6f;
 
         private Rigidbody _rigidbody;
-        private CharacterController _controller;
 
         private Vector2 _moveDirection;
         private float _rotationZ;
@@ -20,7 +20,6 @@ namespace Scripts
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _controller = GetComponent<CharacterController>();
         }
 
         private void FixedUpdate()
@@ -28,10 +27,9 @@ namespace Scripts
             MoveInternal();
         }
 
-        public void MoveForward(float directionForward)
+        public void MoveForward(float input)
         {
-            var direction = new Vector2(_target.position.x - transform.position.x, _target.position.y - transform.position.y);
-            _moveDirection = direction.normalized * directionForward;
+            _moveDirection = transform.up * input;
         }
 
         public void Turn(float rotationZ)
@@ -39,21 +37,28 @@ namespace Scripts
             _rotationZ = rotationZ;
         }
 
+        private void MoveInternal()
+        {
+            _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
+            var deltaRotation = Quaternion.Euler(0f, 0f, 1f * _rotationSpeed);
+            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0f, 0f, _rotationZ * _rotationSpeed * Time.fixedDeltaTime));
+        }
+
         public void DefaultAtack()
         {
-            Instantiate(_bulletPrefab, _target.position, transform.rotation);
+            Instantiate(_bulletPrefab, transform.position, transform.rotation);
         }
 
         public void SpecialAtack()
         {
-            
+            _laser.SetActive(true);
+
+            Invoke(nameof(SwitchOff), _lifeTimeLaser);
         }
 
-        private void MoveInternal()
+        private void SwitchOff()
         {
-            //_rigidbody.AddForce(_moveDirection * _moveSpeed, ForceMode.Impulse);
-            _controller.Move(_moveDirection * _moveSpeed * Time.fixedDeltaTime);
-            _controller.transform.Rotate(0f, 0f, _rotationZ * _rotationSpeed * Time.fixedDeltaTime);
+            _laser.SetActive(false);
         }
     }
 }
