@@ -8,7 +8,7 @@ namespace Scripts
     public class Ship : MonoBehaviour, IInputHandler, IDamageable
     {
         public static event Action ChangeNumberLaser;
-        
+
         public int NumberLaser => _numberLaser;
 
         [SerializeField] private GameObject _bulletPrefab;
@@ -25,6 +25,7 @@ namespace Scripts
 
         private Vector2 _moveDirection;
         private float _rotationZ;
+        private bool _canCharge = true;
 
         private void Awake()
         {
@@ -52,7 +53,7 @@ namespace Scripts
         {
             _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
             var deltaRotation = Quaternion.Euler(0f, 0f, 1f * _rotationSpeed);
-            _rigidbody.MoveRotation(_rigidbody.rotation * 
+            _rigidbody.MoveRotation(_rigidbody.rotation *
                                     Quaternion.Euler(0f, 0f, _rotationZ * _rotationSpeed * Time.fixedDeltaTime));
         }
 
@@ -66,13 +67,18 @@ namespace Scripts
             if (_numberLaser > 0)
             {
                 _numberLaser -= 1;
-                
+
                 ChangeNumberLaser?.Invoke();
-                
+
                 _laser.SetActive(true);
 
                 StartCoroutine(SwitchOffLaser());
-                StartCoroutine(RechargeLaser());
+
+                if (_canCharge)
+                {
+                    _canCharge = false;
+                    StartCoroutine(RechargeLaser());
+                }
             }
         }
 
@@ -84,7 +90,7 @@ namespace Scripts
         private IEnumerator SwitchOffLaser()
         {
             yield return new WaitForSeconds(_lifeTimeLaser);
-                
+
             _laser.SetActive(false);
         }
 
@@ -92,11 +98,16 @@ namespace Scripts
         {
             yield return new WaitForSeconds(_timeRechargeLaser);
 
-            _numberLaser += 1;
-
-            if (_numberLaser < _maxNumberLaser)
+            if (_numberLaser != _maxNumberLaser)
             {
+                _numberLaser += 1;
+                
+                ChangeNumberLaser?.Invoke();
                 StartCoroutine(RechargeLaser());
+            }
+            else
+            {
+                _canCharge = true;
             }
         }
     }
