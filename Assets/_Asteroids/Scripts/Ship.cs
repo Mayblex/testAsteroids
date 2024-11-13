@@ -7,9 +7,11 @@ namespace Scripts
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IDamageable
     {
-        public static event Action ChangeNumberLaser;
+        public static event Action NumberLaserChanged;
+        public static event Action RechargeStarted;
 
         public int NumberLaser => _numberLaser;
+        public float TimeRechargeLaser => _timeRechargeLaser;
 
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private GameObject _laser;
@@ -29,7 +31,7 @@ namespace Scripts
 
         private void Awake()
         {
-            ChangeNumberLaser?.Invoke();
+            NumberLaserChanged?.Invoke();
 
             _rigidbody = GetComponent<Rigidbody>();
         }
@@ -37,6 +39,11 @@ namespace Scripts
         private void FixedUpdate()
         {
             MoveInternal();
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            TakeDamage();
         }
 
         public void MoveForward(float input)
@@ -68,7 +75,7 @@ namespace Scripts
             {
                 _numberLaser -= 1;
 
-                ChangeNumberLaser?.Invoke();
+                NumberLaserChanged?.Invoke();
 
                 _laser.SetActive(true);
 
@@ -96,13 +103,15 @@ namespace Scripts
 
         private IEnumerator RechargeLaser()
         {
-            yield return new WaitForSeconds(_timeRechargeLaser);
-
             if (_numberLaser != _maxNumberLaser)
             {
+                RechargeStarted?.Invoke();
+                
+                yield return new WaitForSeconds(_timeRechargeLaser);
+                
                 _numberLaser += 1;
                 
-                ChangeNumberLaser?.Invoke();
+                NumberLaserChanged?.Invoke();
                 StartCoroutine(RechargeLaser());
             }
             else
