@@ -28,7 +28,8 @@ namespace Scripts
         private void Update()
         {
             _canvasTextSpeed.text = TextSpeed + _shipRigidbody.linearVelocity.magnitude;
-            _canvasTextRotation.text = TextRotation + _shipRigidbody.angularVelocity.magnitude;
+            //_canvasTextRotation.text = TextRotation + _shipRigidbody.angularVelocity.magnitude;
+            _canvasTextRotation.text = TextRotation + _shipRigidbody.transform.eulerAngles.z;
         }
 
         private void OnChangeNumberLaser()
