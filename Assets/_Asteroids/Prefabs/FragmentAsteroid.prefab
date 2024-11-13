@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8378527006691805011}
   - component: {fileID: -2079426580622691005}
   - component: {fileID: 1842225115423428891}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: FragmentAsteroid
   m_TagString: FragmentAsteroid
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 532277264230484900}
   - component: {fileID: 8575439163182570249}
   - component: {fileID: 7331520219340228979}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}

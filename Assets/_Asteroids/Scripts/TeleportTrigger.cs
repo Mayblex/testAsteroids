@@ -36,7 +36,7 @@ namespace Scripts
                 additionDistance = 3f;
             if (other.GetComponent<FragmentAsteroid>())
                 additionDistance = 1.5f;
-            if (other.GetComponent<FO>()) 
+            if (other.GetComponent<FlyingObject>()) 
                 additionDistance = 2.5f;
 
             switch (_border)

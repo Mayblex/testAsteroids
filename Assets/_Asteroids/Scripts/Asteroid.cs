@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Scripts
 {
@@ -10,7 +11,7 @@ namespace Scripts
         {
             CreateFragment(2);
         }
-
+        
         private void CreateFragment(int number)
         {
             for (int i = 0; i < number; i++)

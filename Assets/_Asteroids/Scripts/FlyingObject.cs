@@ -2,10 +2,8 @@
 
 namespace Scripts
 {
-    public class FollowToShip : MonoBehaviour
+    public class FlyingObject : MonoBehaviour, IDamageable
     {
-        private const float MinimalDistance = 4f;
-
         [SerializeField] private float _speedFollow = 5f;
         
         private Transform _target;
@@ -17,8 +15,12 @@ namespace Scripts
 
         private void Update()
         {
-            if (Vector2.Distance(transform.position, _target.position) >= MinimalDistance)
-                transform.position = Vector3.MoveTowards(transform.position, _target.position, _speedFollow * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speedFollow * Time.deltaTime);
+        }
+        
+        public void TakeDamage()
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -1,20 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Scripts
 {
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] private float _speed = 5f;
-        [SerializeField] private float _lifeTime = 3f;
+        [SerializeField] protected float _speed = 5f;
+        [SerializeField] protected float _lifeTime = 3f;
+
+        private protected virtual void Awake()
+        {
+            Destroy(gameObject, _lifeTime);
+        }
 
         private void FixedUpdate()
         {
             Move();
-        }
-
-        private void Awake()
-        {
-            Destroy(gameObject, _lifeTime);
         }
         
         private void OnTriggerEnter(Collider other)
