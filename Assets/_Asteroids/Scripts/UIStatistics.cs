@@ -41,10 +41,10 @@ namespace Scripts
 
         private void Update()
         {
-            _position.text = _shipRigidbody.position.ToString("F1");
+            _position.text = _ship.transform.position.ToString("F1");
             _speed.text = TextSpeed + _shipRigidbody.linearVelocity.magnitude;
             //_canvasTextRotation.text = TextRotation + _shipRigidbody.angularVelocity.magnitude;
-            _rotation.text = TextRotation + Mathf.Round(_shipRigidbody.transform.eulerAngles.z);
+            _rotation.text = TextRotation + Mathf.Round(_ship.transform.eulerAngles.z);
 
             ChangeTime();
         }

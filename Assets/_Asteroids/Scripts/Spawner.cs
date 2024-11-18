@@ -6,11 +6,11 @@ namespace Scripts
 {
     public class Spawner : MonoBehaviour
     {
-        const float _validToY = 16f;
-        const float _validToX = 33f;
-        const float _invalidToX = 26f;
-        const float _invalidToY = 12f;
-        
+        private const float _validToY = 16f;
+        private const float _validToX = 33f;
+        private const float _invalidToX = 26f;
+        private const float _invalidToY = 12f;
+
         [SerializeField] private GameObject _asteroidPrefab;
         [SerializeField] private GameObject _flyingObjectPrefab;
         [SerializeField] private int _numberAsteroid;

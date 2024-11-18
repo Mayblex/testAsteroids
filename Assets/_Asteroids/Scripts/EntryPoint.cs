@@ -12,9 +12,9 @@ namespace Scripts
 
         private void Awake()
         {
-            _inputController.Initialize();
             _laser.Initialize();
             _ship.Initialize();
+            _inputController.Initialize();
         }
 
         private void Start()

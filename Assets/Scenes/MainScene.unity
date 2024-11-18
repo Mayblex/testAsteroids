@@ -1895,11 +1895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d3fb223fba46849aa414f86613cb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputController: {fileID: 0}
+  _inputController: {fileID: 740936609}
   _uiStatistics: {fileID: 218315658}
   _ship: {fileID: 740936610}
   _laser: {fileID: 1681803999}
-  _spawner: {fileID: 0}
+  _spawner: {fileID: 644787522}
 --- !u!4 &1664355684
 Transform:
   m_ObjectHideFlags: 0
