@@ -8,8 +8,6 @@ namespace Scripts
     {
         [SerializeField] private GameObject _view;
         [SerializeField] private float _lifeTime = 0.6f;
-        [SerializeField] private float _timeRecharge = 5f;
-        [SerializeField] private int _number = 3;
         [SerializeField] private int _maxNumber = 3;
 
         private bool _canCharge = true;
@@ -17,8 +15,8 @@ namespace Scripts
         public event Action NumberChanged;
         public event Action RechargeStarted;
 
-        public int Number => _number;
-        public float TimeRecharge => _timeRecharge;
+        [field: SerializeField] public int Number { get; private set; } = 3;
+        [field: SerializeField] public float TimeRecharge { get; private set; } = 5f;
 
         public void Initialize()
         {
@@ -27,9 +25,9 @@ namespace Scripts
 
         public void Shoot()
         {
-            if (_number > 0)
+            if (Number > 0)
             {
-                _number -= 1;
+                Number -= 1;
 
                 NumberChanged?.Invoke();
 
@@ -47,13 +45,13 @@ namespace Scripts
 
         private IEnumerator RechargeLaser()
         {
-            if (_number != _maxNumber)
+            if (Number != _maxNumber)
             {
                 RechargeStarted?.Invoke();
                 
-                yield return new WaitForSeconds(_timeRecharge);
+                yield return new WaitForSeconds(TimeRecharge);
                 
-                _number += 1;
+                Number += 1;
                 
                 NumberChanged?.Invoke();
                 StartCoroutine(RechargeLaser());
