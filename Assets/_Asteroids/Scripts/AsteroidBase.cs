@@ -5,8 +5,8 @@ namespace Scripts
     public abstract class AsteroidBase : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _speed = 5f;
-        
-        private Vector3 _direction = Vector3.zero;
+
+        private Vector2 _direction;
 
         private void Awake()
         {
@@ -20,15 +20,15 @@ namespace Scripts
 
         public void TakeDamage()
         {
+            PerformOnDie();
             Destroy(gameObject);
         }
 
+        private protected virtual void PerformOnDie() { }
+
         private void SetRandomDirection()
         {
-            while(_direction == Vector3.zero)
-            {
-                _direction = new Vector3(Random.Range(-4, 4), Random.Range(-4, 4), 0f).normalized;
-            }
+            _direction = Random.insideUnitCircle.normalized;
         }
     }
 }

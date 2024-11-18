@@ -10,8 +10,6 @@ namespace Scripts
 
         [SerializeField] private Vector3 _exitPosition;
 
-        private bool _entered = false;
-
         private void OnValidate()
         {
             _collider ??= GetComponent<BoxCollider>();
@@ -19,25 +17,14 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_entered)
-                return;
-
-            _entered = true;
-            
-            Rigidbody teleportObject = other.GetComponent<Rigidbody>();
-            float magnitude = teleportObject.linearVelocity.magnitude;
-            Vector3 enterPosition = teleportObject.transform.position;
+            Rigidbody rigidbody = other.GetComponent<Rigidbody>();
+            float magnitude = rigidbody.linearVelocity.magnitude;
+            Vector3 enterPosition = rigidbody.transform.position;
             Vector3 exitPosition = _exitPosition;
             float additionDistance = 0f;
 
-            if (other.GetComponent<Ship>())
-                additionDistance = 2f;
-            if (other.GetComponent<Asteroid>())
-                additionDistance = 3f;
-            if (other.GetComponent<FragmentAsteroid>())
-                additionDistance = 1.5f;
-            if (other.GetComponent<FlyingObject>()) 
-                additionDistance = 2.5f;
+            if (other.TryGetComponent<TeleportObject>(out TeleportObject teleportObject))
+                additionDistance = teleportObject.AdditionDistance;
 
             switch (_border)
             {
@@ -56,11 +43,6 @@ namespace Scripts
             }
 
             other.transform.position = exitPosition;
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            _entered = false;
         }
 
         private void OnDrawGizmos()

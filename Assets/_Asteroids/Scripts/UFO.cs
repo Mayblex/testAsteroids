@@ -2,7 +2,7 @@
 
 namespace Scripts
 {
-    public class FlyingObject : MonoBehaviour, IDamageable
+    public class UFO : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _speedFollow = 5f;
         

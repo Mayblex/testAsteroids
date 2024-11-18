@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8183757007824104189}
   - component: {fileID: 4739013702744413086}
   - component: {fileID: 2598276101420400210}
+  - component: {fileID: 1630371668446967031}
   m_Layer: 14
-  m_Name: FlyingObject
+  m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedFollow: 5
+--- !u!114 &1630371668446967031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989484671766060907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c84a566aaf460b9fc45c31567fc8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AdditionDistance>k__BackingField: 2.5
 --- !u!1 &8551593576731210866
 GameObject:
   m_ObjectHideFlags: 0

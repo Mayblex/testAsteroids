@@ -7,32 +7,21 @@ namespace Scripts
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IDamageable
     {
-        public static event Action NumberLaserChanged;
-        public static event Action RechargeStarted;
-
-        public int NumberLaser => _numberLaser;
-        public float TimeRechargeLaser => _timeRechargeLaser;
-
+        public event Action Died;
+        
         [SerializeField] private GameObject _bulletPrefab;
-        [SerializeField] private GameObject _laser;
+        [SerializeField] private Laser _laser;
 
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
-        [SerializeField] private float _lifeTimeLaser = 0.6f;
-        [SerializeField] private float _timeRechargeLaser = 5f;
-        [SerializeField] private int _numberLaser = 3;
-        [SerializeField] private int _maxNumberLaser = 3;
 
         private Rigidbody _rigidbody;
 
         private Vector2 _moveDirection;
         private float _rotationZ;
-        private bool _canCharge = true;
 
         private void Awake()
         {
-            NumberLaserChanged?.Invoke();
-
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -71,53 +60,13 @@ namespace Scripts
 
         public void SpecialAtack()
         {
-            if (_numberLaser > 0)
-            {
-                _numberLaser -= 1;
-
-                NumberLaserChanged?.Invoke();
-
-                _laser.SetActive(true);
-
-                StartCoroutine(SwitchOffLaser());
-
-                if (_canCharge)
-                {
-                    _canCharge = false;
-                    StartCoroutine(RechargeLaser());
-                }
-            }
+            _laser.Shoot();
         }
 
         public void TakeDamage()
         {
+            Died?.Invoke();
             gameObject.SetActive(false);
-        }
-
-        private IEnumerator SwitchOffLaser()
-        {
-            yield return new WaitForSeconds(_lifeTimeLaser);
-
-            _laser.SetActive(false);
-        }
-
-        private IEnumerator RechargeLaser()
-        {
-            if (_numberLaser != _maxNumberLaser)
-            {
-                RechargeStarted?.Invoke();
-                
-                yield return new WaitForSeconds(_timeRechargeLaser);
-                
-                _numberLaser += 1;
-                
-                NumberLaserChanged?.Invoke();
-                StartCoroutine(RechargeLaser());
-            }
-            else
-            {
-                _canCharge = true;
-            }
         }
     }
 }

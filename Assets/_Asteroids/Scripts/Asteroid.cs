@@ -6,8 +6,8 @@ namespace Scripts
     public class Asteroid : AsteroidBase
     {
         [SerializeField] private GameObject _fragmentAsteroidPrefab;
-
-        private void OnDestroy()
+        
+        private protected override void PerformOnDie()
         {
             CreateFragment(2);
         }
