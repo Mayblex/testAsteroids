@@ -4,7 +4,7 @@ namespace Scripts
 {
     public class UFO : MonoBehaviour, IDamageable
     {
-        [SerializeField] private float _speedFollow = 5f;
+        [SerializeField] private float _speed = 5f;
         
         private Transform _target;
 
@@ -15,7 +15,7 @@ namespace Scripts
 
         private void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speedFollow * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
         }
         
         public void TakeDamage()

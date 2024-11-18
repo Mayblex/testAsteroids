@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Scripts
@@ -7,8 +6,6 @@ namespace Scripts
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IDamageable
     {
-        public event Action Died;
-        
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Laser _laser;
 
@@ -20,7 +17,14 @@ namespace Scripts
         private Vector2 _moveDirection;
         private float _rotationZ;
 
-        private void Awake()
+        public void Constract(Laser laser)
+        {
+            _laser = laser;
+        }
+        
+        public event Action Died;
+
+        public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }

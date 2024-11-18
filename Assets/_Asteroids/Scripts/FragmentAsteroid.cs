@@ -1,7 +1,4 @@
 ﻿namespace Scripts
 {
-    public class FragmentAsteroid : AsteroidBase
-    {
-        
-    }
+    public class FragmentAsteroid : AsteroidBase { }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Scripts
@@ -20,7 +19,7 @@ namespace Scripts
         private float _time = 25f;
         private float _deltaTime = 7f;
 
-        private void Start()
+        public void Run()
         {
             Spawn(_numberAsteroid, _asteroidPrefab);
             Spawn(_numberFO, _flyingObjectPrefab);

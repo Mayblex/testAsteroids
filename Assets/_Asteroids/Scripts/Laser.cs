@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Scripts
 {
     public class Laser : MonoBehaviour
     {
-        public event Action NumberChanged;
-        public event Action RechargeStarted;
-        
-        public int Number => _number;
-        public float TimeRecharge => _timeRecharge;
-
         [SerializeField] private GameObject _view;
         [SerializeField] private float _lifeTime = 0.6f;
         [SerializeField] private float _timeRecharge = 5f;
         [SerializeField] private int _number = 3;
         [SerializeField] private int _maxNumber = 3;
-        
+
         private bool _canCharge = true;
 
-        private void Awake()
+        public event Action NumberChanged;
+        public event Action RechargeStarted;
+
+        public int Number => _number;
+        public float TimeRecharge => _timeRecharge;
+
+        public void Initialize()
         {
             NumberChanged?.Invoke();
         }

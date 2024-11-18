@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts
 {
@@ -8,7 +7,7 @@ namespace Scripts
         [SerializeField] protected float _speed = 5f;
         [SerializeField] protected float _lifeTime = 3f;
 
-        private protected virtual void Awake()
+        private void Awake()
         {
             Destroy(gameObject, _lifeTime);
         }

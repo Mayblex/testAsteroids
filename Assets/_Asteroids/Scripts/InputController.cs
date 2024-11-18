@@ -10,7 +10,7 @@ namespace Scripts
         private IInputHandler _inputHandler;
         private PlayerInput _playerInput;
 
-        private void Awake()
+        public void Initialize()
         {
             _playerInput = new PlayerInput();
             _playerInput.Enable();

@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Scripts
 {
@@ -22,13 +21,19 @@ namespace Scripts
         private Rigidbody _shipRigidbody;
         private float _currentTime;
 
-        private void Start()
+        public void Constract(Ship ship, Laser laser)
+        {
+            _ship = ship;
+            _laser = laser;
+        }
+        
+        public void Run()
         {
             _laser.NumberChanged += OnNumberChanged;
             _laser.RechargeStarted += OnRechargeStarted;
             _ship.Died += OnShipDied;
 
-            _shipRigidbody = GameObject.FindWithTag("Ship").GetComponent<Rigidbody>();
+            _shipRigidbody = _ship.GetComponent<Rigidbody>();
 
             NumberLaserUpdate();
             TimeRechargeUpdate();
