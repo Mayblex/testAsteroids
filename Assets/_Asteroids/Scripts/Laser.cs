@@ -9,20 +9,20 @@ namespace Scripts
         [SerializeField] private GameObject _view;
         [SerializeField] private float _lifeTime = 0.6f;
         [SerializeField] private int _maxNumber = 3;
-
+        
         private bool _canCharge = true;
-
+        
         public event Action NumberChanged;
         public event Action RechargeStarted;
-
+        
         [field: SerializeField] public int Number { get; private set; } = 3;
         [field: SerializeField] public float TimeRecharge { get; private set; } = 5f;
-
+        
         public void Initialize()
         {
             NumberChanged?.Invoke();
         }
-
+        
         public void Shoot()
         {
             if (Number > 0)

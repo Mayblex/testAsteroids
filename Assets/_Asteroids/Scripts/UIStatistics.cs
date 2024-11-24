@@ -18,13 +18,13 @@ namespace Scripts
         [SerializeField] private TextMeshProUGUI _timeRecharge;
         [SerializeField] private Ship _ship;
         [SerializeField] private Laser _laser;
-
-        private Rigidbody _shipRigidbody;
+        
+        private IReadonlyShip _readonlyShip;
         private float _currentTime;
 
-        public void Constract(Ship ship, Laser laser)
+        public void Constract(IReadonlyShip readonlyShip, Laser laser)
         {
-            _ship = ship;
+            _readonlyShip = readonlyShip;
             _laser = laser;
         }
         
@@ -33,18 +33,16 @@ namespace Scripts
             _laser.NumberChanged += OnNumberChanged;
             _laser.RechargeStarted += OnRechargeStarted;
             _ship.Died += OnShipDied;
-
-            _shipRigidbody = _ship.GetComponent<Rigidbody>();
-
+            
             NumberLaserUpdate();
             TimeRechargeUpdate();
         }
 
         private void Update()
         {
-            _position.text = _ship.transform.position.ToString("F1");
-            _speed.text = TextSpeed + _shipRigidbody.linearVelocity.magnitude;
-            _rotation.text = TextRotation + Math.Round(_shipRigidbody.angularVelocity.magnitude, 2);
+            _position.text = _readonlyShip.Position.ToString("F1");
+            _speed.text = TextSpeed + _readonlyShip.Speed;
+            _rotation.text = TextRotation + _readonlyShip.Rotation;
 
             ChangeTime();
         }

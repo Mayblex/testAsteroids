@@ -4,13 +4,17 @@ using UnityEngine;
 namespace Scripts
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Ship : MonoBehaviour, IInputHandler, IDamageable
+    public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable
     {
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Laser _laser;
 
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
+        
+        public Vector2 Position { get; set; }
+        public float Speed { get; set; }
+        public double Rotation { get; set; }
 
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
@@ -26,6 +30,13 @@ namespace Scripts
         public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Update()
+        {
+            Position = transform.position;
+            Speed = _rigidbody.linearVelocity.magnitude;
+            Rotation = Math.Round(_rigidbody.angularVelocity.magnitude, 2);
         }
 
         private void FixedUpdate()

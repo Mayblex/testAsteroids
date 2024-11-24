@@ -196,4 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c84a566aaf460b9fc45c31567fc8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AdditionDistance>k__BackingField: 3
+  <AdditionDistance>k__BackingField: 3.2
