@@ -6,7 +6,7 @@ namespace Scripts
     {
         private const string Path = "Prefabs/UFO";
 
-        private GameObject _ufoPrefab; 
+        private readonly GameObject _ufoPrefab; 
         
         public UFOFactory(GameObject ufoPrefab)
         {
