@@ -6,9 +6,12 @@ namespace Scripts
     {
         [SerializeField] protected float _speed = 5f;
         [SerializeField] protected float _lifeTime = 3f;
+        
+        private Rigidbody _rigidbody;
 
         private void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             Destroy(gameObject, _lifeTime);
         }
 
@@ -28,7 +31,7 @@ namespace Scripts
 
         private void Move()
         {
-            transform.Translate(Vector3.up * _speed * Time.fixedDeltaTime);
+            _rigidbody.linearVelocity = Vector3.up * _speed;
         }
     }
 }

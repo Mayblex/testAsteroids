@@ -11,18 +11,23 @@ namespace Scripts
         private const float _invalidToX = 26f;
         private const float _invalidToY = 12f;
 
-        [SerializeField] private GameObject _asteroidPrefab;
-        [SerializeField] private GameObject _flyingObjectPrefab;
         [SerializeField] private int _numberAsteroid;
-        [SerializeField] private int _numberFO;
-        
+        [SerializeField] private int _numberUFO;
+
+        private AsteroidFactory _asteroidFactory;
+        private UFOFactory _ufoFactory;
         private float _time = 25f;
         private float _deltaTime = 7f;
 
+        public void Constract(AsteroidFactory asteroidFactory, UFOFactory ufoFactory)
+        {
+            _asteroidFactory = asteroidFactory;
+            _ufoFactory = ufoFactory;
+        }
+        
         public void Run()
         {
-            Spawn(_numberAsteroid, _asteroidPrefab);
-            Spawn(_numberFO, _flyingObjectPrefab);
+            Spawn(_numberAsteroid, _numberUFO);
             StartCoroutine(SpawnObjectsAfterTime());
         }
 
@@ -32,20 +37,24 @@ namespace Scripts
             {
                 yield return new WaitForSeconds(_time);
 
-                Spawn(_numberAsteroid, _asteroidPrefab);
-                Spawn(_numberFO, _flyingObjectPrefab);
+                Spawn(_numberAsteroid, _numberUFO);
 
                 _time += _deltaTime;
                 _numberAsteroid += _numberAsteroid;
-                _numberFO += _numberFO;
+                _numberUFO += _numberUFO;
             }
         }
 
-        private void Spawn(int number, GameObject prefab)
+        private void Spawn(int numberAsteroid, int numberUFO)
         {
-            for (int i = 0; i < number; i++)
+            for (int i = 0; i < numberAsteroid; i++)
             {
-                Instantiate(prefab, GeneratePosition(), transform.rotation);
+                _asteroidFactory.Create(GeneratePosition());
+            }
+
+            for (int i = 0; i < numberUFO; i++)
+            {
+                _ufoFactory.Create(GeneratePosition());
             }
         }
 

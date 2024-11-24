@@ -7,20 +7,26 @@ namespace Scripts
         [SerializeField] private float _speed = 5f;
         
         private Transform _target;
+        private Rigidbody _rigidbody;
 
         private void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             _target = GameObject.FindWithTag(nameof(Ship)).transform;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+            Move();
         }
-        
-        public void TakeDamage()
-        {
+
+        public void TakeDamage() => 
             Destroy(gameObject);
+
+        private void Move()
+        {
+            Vector3 direction = (_target.position - transform.position).normalized;
+            _rigidbody.linearVelocity =  _speed * direction;
         }
     }
 }

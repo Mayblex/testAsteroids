@@ -13,7 +13,6 @@ namespace Scripts
         [SerializeField] private float _rotationSpeed = 5f;
 
         private Rigidbody _rigidbody;
-
         private Vector2 _moveDirection;
         private float _rotationZ;
 
@@ -34,38 +33,26 @@ namespace Scripts
             MoveInternal();
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
+        private void OnCollisionEnter(Collision other) => 
             TakeDamage();
-        }
 
-        public void MoveForward(float input)
-        {
+        public void MoveForward(float input) => 
             _moveDirection = transform.up * input;
-        }
 
-        public void Turn(float rotationZ)
-        {
+        public void Turn(float rotationZ) => 
             _rotationZ = rotationZ;
-        }
 
         private void MoveInternal()
         {
             _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
-            var deltaRotation = Quaternion.Euler(0f, 0f, 1f * _rotationSpeed);
-            _rigidbody.MoveRotation(_rigidbody.rotation *
-                                    Quaternion.Euler(0f, 0f, _rotationZ * _rotationSpeed * Time.fixedDeltaTime));
+            _rigidbody.angularVelocity = Vector3.forward * (_rotationZ * _rotationSpeed);
         }
 
-        public void DefaultAtack()
-        {
+        public void DefaultAtack() => 
             Instantiate(_bulletPrefab, transform.position, transform.rotation);
-        }
 
-        public void SpecialAtack()
-        {
+        public void SpecialAtack() => 
             _laser.Shoot();
-        }
 
         public void TakeDamage()
         {

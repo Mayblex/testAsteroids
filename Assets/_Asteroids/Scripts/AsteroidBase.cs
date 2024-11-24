@@ -7,15 +7,17 @@ namespace Scripts
         [SerializeField] private float _speed = 5f;
 
         private Vector2 _direction;
+        private Rigidbody _rigidbody;
 
         private void Awake()
         {
             SetRandomDirection();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()
         {
-            transform.Translate(_direction * _speed * Time.fixedDeltaTime);
+            Move();
         }
 
         public void TakeDamage()
@@ -25,6 +27,9 @@ namespace Scripts
         }
 
         private protected virtual void PerformOnDie() { }
+
+        private void Move() => 
+            _rigidbody.linearVelocity = _speed * _direction;
 
         private void SetRandomDirection()
         {

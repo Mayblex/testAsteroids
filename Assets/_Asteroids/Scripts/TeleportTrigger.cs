@@ -18,7 +18,6 @@ namespace Scripts
         private void OnTriggerEnter(Collider other)
         {
             Rigidbody rigidbody = other.GetComponent<Rigidbody>();
-            float magnitude = rigidbody.linearVelocity.magnitude;
             Vector3 enterPosition = rigidbody.transform.position;
             Vector3 exitPosition = _exitPosition;
             float additionDistance = 0f;

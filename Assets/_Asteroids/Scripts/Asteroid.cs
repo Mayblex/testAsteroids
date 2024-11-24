@@ -15,7 +15,7 @@ namespace Scripts
         {
             for (int i = 0; i < number; i++)
             {
-                Instantiate<GameObject>(_fragmentAsteroidPrefab, transform.position, transform.rotation);
+                Instantiate(_fragmentAsteroidPrefab, transform.position, transform.rotation);
             }
         }
     }
