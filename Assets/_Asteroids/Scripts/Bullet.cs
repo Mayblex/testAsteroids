@@ -30,6 +30,6 @@ namespace Scripts
         }
 
         private void Move() => 
-            _rigidbody.linearVelocity = Vector3.up * _speed;
+            _rigidbody.linearVelocity = transform.up * _speed;
     }
 }
