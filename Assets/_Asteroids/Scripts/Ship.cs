@@ -9,7 +9,7 @@ namespace Scripts
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
-        
+
         private Laser _laser;
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
@@ -22,9 +22,9 @@ namespace Scripts
         
         public event Action Died;
         
-        public Vector2 Position { get; set; }
-        public float Speed { get; set; }
-        public double Rotation { get; set; }
+        public Vector2 Position { get; private set; }
+        public float Speed { get; private set; }
+        public double Rotation { get; private set; }
 
         public void Initialize()
         {

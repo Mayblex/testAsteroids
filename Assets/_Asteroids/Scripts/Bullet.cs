@@ -4,8 +4,8 @@ namespace Scripts
 {
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] protected float _speed = 5f;
-        [SerializeField] protected float _lifeTime = 3f;
+        [SerializeField] private float _speed = 5f;
+        [SerializeField] private float _lifeTime = 3f;
         
         private Rigidbody _rigidbody;
 

@@ -20,10 +20,8 @@ namespace Scripts
             Move();
         }
 
-        public void SetTarget(Transform target)
-        {
+        public void SetTarget(Transform target) => 
             _target = target;
-        }
 
         public void TakeDamage() => 
             Destroy(gameObject);
