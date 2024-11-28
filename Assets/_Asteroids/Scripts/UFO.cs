@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Scripts
 {
@@ -12,7 +13,6 @@ namespace Scripts
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _target = GameObject.FindWithTag(nameof(Ship)).transform;
         }
 
         private void FixedUpdate()
