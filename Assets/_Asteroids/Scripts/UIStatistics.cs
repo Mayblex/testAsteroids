@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Scripts
@@ -16,12 +15,11 @@ namespace Scripts
         [SerializeField] private TextMeshProUGUI _rotation;
         [SerializeField] private TextMeshProUGUI _numberLaser;
         [SerializeField] private TextMeshProUGUI _timeRecharge;
-        [SerializeField] private Ship _ship;
-        [SerializeField] private Laser _laser;
         
         private IReadonlyShip _readonlyShip;
+        private Laser _laser;
         private float _currentTime;
-
+        
         public void Constract(IReadonlyShip readonlyShip, Laser laser)
         {
             _readonlyShip = readonlyShip;
@@ -32,7 +30,7 @@ namespace Scripts
         {
             _laser.NumberChanged += OnNumberChanged;
             _laser.RechargeStarted += OnRechargeStarted;
-            _ship.Died += OnShipDied;
+            _readonlyShip.Died += OnShipDied;
             
             NumberLaserUpdate();
             TimeRechargeUpdate();
@@ -57,7 +55,7 @@ namespace Scripts
         {
             _laser.NumberChanged -= OnNumberChanged;
             _laser.RechargeStarted -= OnRechargeStarted;
-            _ship.Died -= OnShipDied;
+            _readonlyShip.Died -= OnShipDied;
         }
 
         private void NumberLaserUpdate() =>

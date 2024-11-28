@@ -7,15 +7,10 @@ namespace Scripts
     public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable
     {
         [SerializeField] private GameObject _bulletPrefab;
-        [SerializeField] private Laser _laser;
-
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
         
-        public Vector2 Position { get; set; }
-        public float Speed { get; set; }
-        public double Rotation { get; set; }
-
+        private Laser _laser;
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
         private float _rotationZ;
@@ -26,6 +21,10 @@ namespace Scripts
         }
         
         public event Action Died;
+        
+        public Vector2 Position { get; set; }
+        public float Speed { get; set; }
+        public double Rotation { get; set; }
 
         public void Initialize()
         {

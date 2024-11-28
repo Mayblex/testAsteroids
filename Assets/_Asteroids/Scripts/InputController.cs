@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 namespace Scripts
 {
-    [RequireComponent(typeof(IInputHandler))]
-
     public class InputController : MonoBehaviour
     {
         private IInputHandler _inputHandler;
@@ -18,7 +16,7 @@ namespace Scripts
             _inputHandler = GetComponent<IInputHandler>();
         }
 
-        private void Update()
+        public void Update()
         {
             ReadMove();
             ReadRotation();
