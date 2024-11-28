@@ -7,13 +7,15 @@ namespace Scripts
     {
         private ObjectPool<GameObject> _pool;
 
-        private GameObject _prefab;
+        private IFactory _factory;
+        private Vector2 _position;
 
-        public ObjectPool(GameObject prefab, int prewarmObjectsCount)
+        public ObjectPool(IFactory factory, int prewarmObjectsCount, Vector2 position)
         {
-            _prefab = prefab;
+            _factory = factory;
             _pool = new ObjectPool<GameObject>(OnCreateObject, OnGetObject, OnRelease, OnObjectDestroy, false,
                 prewarmObjectsCount);
+            _position = position;
         }
 
         public GameObject Get()
@@ -38,7 +40,9 @@ namespace Scripts
         private void OnGetObject(GameObject obj) => 
             obj.gameObject.SetActive(true);
 
-        private GameObject OnCreateObject() => 
-            Object.Instantiate(_prefab);
+        private GameObject OnCreateObject()
+        {
+            return _factory.Create(_position);
+        }
     }
 }

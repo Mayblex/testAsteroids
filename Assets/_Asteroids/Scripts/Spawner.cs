@@ -25,6 +25,8 @@ namespace Scripts
         {
             _asteroidFactory = asteroidFactory;
             _ufoFactory = ufoFactory;
+            _asteroidPool = new ObjectPool(_asteroidFactory, 15, transform.position);
+            _ufoPool = new ObjectPool(_ufoFactory, 7, transform.position);
         }
         
         public void Run()
@@ -51,18 +53,20 @@ namespace Scripts
         {
             for (int i = 0; i < numberAsteroid; i++)
             {
-                _asteroidFactory.Create(GeneratePosition());
+                var asteroid = _asteroidPool.Get();
+                asteroid.transform.position = GeneratePosition();
             }
 
             for (int i = 0; i < numberUFO; i++)
             {
-                _ufoFactory.Create(GeneratePosition());
+                var ufo = _ufoPool.Get();
+                ufo.transform.position = GeneratePosition();
             }
         }
 
-        private Vector2 GeneratePosition()
+        private Vector3 GeneratePosition()
         {
-            Vector2 position = Vector2.zero;
+            Vector3 position = Vector3.zero;
 
             while(position.x < InvalidToX && position.y < InvalidToY)
             {
