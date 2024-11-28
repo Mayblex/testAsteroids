@@ -5,7 +5,6 @@ namespace Scripts
     public class UFOFactory : IFactory
     {
         private readonly GameObject _ufoPrefab;
-        
         private readonly Transform _target;
         
         public UFOFactory(GameObject ufoPrefab, Transform target)
