@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 8993274273348826044}
   - component: {fileID: 1586901335721679501}
   - component: {fileID: 7040406075199706079}
-  - component: {fileID: 3064893928176737252}
   - component: {fileID: 1555414435988592958}
   m_Layer: 13
   m_Name: Ship
@@ -239,18 +238,6 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 110616789587021764, guid: b55ab0ef9c85bf44b84eedc772342c90, type: 3}
   _moveSpeed: 12
   _rotationSpeed: 2.1
---- !u!114 &3064893928176737252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3884115620029438690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9031b8829365fd44b9233e33b39f30a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1555414435988592958
 MonoBehaviour:
   m_ObjectHideFlags: 0

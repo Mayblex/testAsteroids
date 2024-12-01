@@ -1,44 +1,40 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Scripts
 {
-    public class InputController : MonoBehaviour
+    public class InputController
     {
         private IInputHandler _inputHandler;
         private PlayerInput _playerInput;
 
-        private void Awake()
+        public InputController(PlayerInput playerInput,IInputHandler inputHandler)
         {
-            _playerInput = new PlayerInput();
+            _playerInput = playerInput;
+            _inputHandler = inputHandler;
+            
             _playerInput.Enable();
             
-            _inputHandler = GetComponent<IInputHandler>();
+            _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
+            _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;
         }
-
-        public void Update()
+        
+        public void ProcessInput()
         {
             ReadMove();
             ReadRotation();
         }
-
-        private void OnEnable()
-        {
-            _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
-            _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;
-        }
-
-        private void OnDisable()
+        
+        private void Dispose()
         {
             _playerInput.Gameplay.DefaultAtack.performed -= OnDefaultAtackPerformed;
             _playerInput.Gameplay.SpecialAtack.performed -= OnSpecialAtackPerformed;
         }
-
+        
         private void OnDefaultAtackPerformed(InputAction.CallbackContext obj)
         {
             _inputHandler.DefaultAtack();
         }
-
+        
         private void OnSpecialAtackPerformed(InputAction.CallbackContext obj)
         {
             _inputHandler.SpecialAtack();

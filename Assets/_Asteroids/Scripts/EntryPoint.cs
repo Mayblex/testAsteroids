@@ -12,7 +12,9 @@ namespace _Asteroids.Scripts
         [SerializeField] private GameObject _fragmentasteroidPrefab;
         [SerializeField] private GameObject _ufoPrefab;
         [SerializeField] private GameObject _shipPrefab;
-        
+
+        private PlayerInput _playerInput;
+        private IInputHandler _inputHandler;
         private InputController _inputController;
         private ShipFactory _shipFactory;
         private AsteroidFactory _asteroidFactory;
@@ -28,12 +30,14 @@ namespace _Asteroids.Scripts
             _player = _shipFactory.Create(Vector2.zero);
             _ship = _player.GetComponent<Ship>();
             _ship.Initialize();
-            //_inputController.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
             _asteroidFactory = new AsteroidFactory(_asteroidPrefab);
             _fragmentAsteroidFactory = new AsteroidFactory(_fragmentasteroidPrefab);
             _ufoFactory = new UFOFactory(_ufoPrefab, _ship.transform);
+            _playerInput = new PlayerInput();
+            _inputHandler = _player.GetComponent<IInputHandler>();
+            _inputController = new InputController(_playerInput, _inputHandler);
         }
 
         private void Start()
@@ -43,6 +47,11 @@ namespace _Asteroids.Scripts
             _uiStatistics.Run();
             _spawner.Constract(_asteroidFactory, _fragmentAsteroidFactory, _ufoFactory);
             _spawner.Run();
+        }
+
+        private void Update()
+        {
+            _inputController.ProcessInput();
         }
     }
 }
