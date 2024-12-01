@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class UFO : MonoBehaviour, IDamageable
+    public class UFO : MonoBehaviour, IDamageable, IPoolable
     {
         [SerializeField] private float _speed = 5f;
         
         private Transform _target;
         private Rigidbody _rigidbody;
+
+        public event Action<GameObject> Released;
 
         private void Awake()
         {
@@ -24,7 +26,7 @@ namespace Scripts
             _target = target;
 
         public void TakeDamage() => 
-            Destroy(gameObject);
+            Released?.Invoke(gameObject);
 
         private void Move()
         {

@@ -1400,9 +1400,9 @@ MonoBehaviour:
   _uiStatistics: {fileID: 218315658}
   _spawner: {fileID: 644787522}
   _asteroidPrefab: {fileID: 7306217542560880922, guid: b59bfe2be53e8df4fba20b0a23f31b67, type: 3}
+  _fragmentasteroidPrefab: {fileID: 3853676829029392778, guid: 3a8c8bae8966a5d41889b5b0f858e176, type: 3}
   _ufoPrefab: {fileID: 5989484671766060907, guid: 310a1a7bf4edd6942a50c52de461b5bd, type: 3}
   _shipPrefab: {fileID: 3884115620029438690, guid: 1303557a25b684648979991d34dba5f7, type: 3}
-  _inputController: {fileID: 0}
 --- !u!4 &1664355684
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scripts
+namespace Scripts.Factory
 {
     public class ShipFactory : IFactory
     {

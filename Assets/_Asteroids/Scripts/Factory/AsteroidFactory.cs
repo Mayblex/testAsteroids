@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Pool;
 
-namespace Scripts
+namespace Scripts.Factory
 {
     public class AsteroidFactory : IFactory
     {

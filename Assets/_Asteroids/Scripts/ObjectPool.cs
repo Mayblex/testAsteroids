@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.Factory;
+using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Scripts
@@ -23,17 +24,17 @@ namespace Scripts
             var obj = _pool.Get();
             return obj;
         }
-        
-        public void Release(GameObject obj)
+
+        private void Release(GameObject obj)
         {
             _pool.Release(obj);
         }
-        
+
         private void OnObjectDestroy(GameObject obj)
         {
             GameObject.Destroy(obj);
         }
-        
+
         private void OnRelease(GameObject obj) => 
             obj.gameObject.SetActive(false);
 
@@ -42,7 +43,12 @@ namespace Scripts
 
         private GameObject OnCreateObject()
         {
-            return _factory.Create(_position);
+            GameObject obj = _factory.Create(_position);
+
+            if (obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+                poolable.Released += Release;
+            
+            return obj;
         }
     }
 }

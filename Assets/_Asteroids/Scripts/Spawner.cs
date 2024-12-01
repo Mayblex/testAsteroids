@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Scripts.Factory;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,20 +16,25 @@ namespace Scripts
         [SerializeField] private int _numberUFO;
 
         private AsteroidFactory _asteroidFactory;
+        private AsteroidFactory _fragmentAsteroidFactory;
         private UFOFactory _ufoFactory;
         private ObjectPool _asteroidPool;
+        private ObjectPool _fragmentAsteroidPool;
         private ObjectPool _ufoPool;
         private float _time = 25f;
         private float _deltaTime = 7f;
 
-        public void Constract(AsteroidFactory asteroidFactory, UFOFactory ufoFactory)
+        public void Constract(AsteroidFactory asteroidFactory, AsteroidFactory fragmentAsteroidFactory,
+            UFOFactory ufoFactory)
         {
             _asteroidFactory = asteroidFactory;
+            _fragmentAsteroidFactory = fragmentAsteroidFactory;
             _ufoFactory = ufoFactory;
             _asteroidPool = new ObjectPool(_asteroidFactory, 15, transform.position);
+            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidFactory, 22, transform.position);
             _ufoPool = new ObjectPool(_ufoFactory, 7, transform.position);
         }
-        
+
         public void Run()
         {
             Spawn(_numberAsteroid, _numberUFO);
@@ -55,6 +61,7 @@ namespace Scripts
             {
                 var asteroid = _asteroidPool.Get();
                 asteroid.transform.position = GeneratePosition();
+                asteroid.GetComponent<Asteroid>().Creating += OnCreating;
             }
 
             for (int i = 0; i < numberUFO; i++)
@@ -64,11 +71,17 @@ namespace Scripts
             }
         }
 
+        private void OnCreating(Vector3 position)
+        {
+            var asteroid = _fragmentAsteroidPool.Get();
+            asteroid.transform.position = position;
+        }
+
         private Vector3 GeneratePosition()
         {
             Vector3 position = Vector3.zero;
 
-            while(position.x < InvalidToX && position.y < InvalidToY)
+            while (position.x < InvalidToX && position.y < InvalidToY)
             {
                 position.y = Random.Range(-ValidToY, ValidToY);
                 position.x = Random.Range(-ValidToX, ValidToX);
