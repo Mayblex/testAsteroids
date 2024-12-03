@@ -73,10 +73,11 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
             }
         }
 
-        private void OnCreating(Vector3 position)
+        private void OnCreating(GameObject parent,Vector3 position)
         {
             var asteroid = _fragmentAsteroidPool.Get();
             asteroid.transform.position = position;
+            parent.GetComponent<Asteroid>().Creating -= OnCreating;
         }
 
         private Vector3 GeneratePosition()

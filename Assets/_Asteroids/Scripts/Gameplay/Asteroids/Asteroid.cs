@@ -5,19 +5,8 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
 {
     public class Asteroid : AsteroidBase
     {
-        public event Action<Vector3> Creating;
-
-        private protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            Creating = null;
-        }
-
-        private void OnDisable()
-        {
-            Creating = null;
-        }
-
+        public event Action<GameObject, Vector3> Creating;
+        
         private protected override void PerformOnDie()
         {
             CreateFragment(2);
@@ -27,7 +16,7 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
         {
             for (int i = 0; i < number; i++)
             {
-                Creating?.Invoke(transform.position);
+                Creating?.Invoke(gameObject, transform.position);
             }
         }
     }

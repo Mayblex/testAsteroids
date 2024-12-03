@@ -26,11 +26,6 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
             Move();
         }
 
-        private protected virtual void OnDestroy()
-        {
-            Released = null;
-        }
-
         public void TakeDamage()
         {
             PerformOnDie();

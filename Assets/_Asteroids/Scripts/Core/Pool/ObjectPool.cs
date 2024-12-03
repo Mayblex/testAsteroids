@@ -32,7 +32,10 @@ namespace _Asteroids.Scripts.Core.Pool
 
         private void OnObjectDestroy(GameObject obj)
         {
-            GameObject.Destroy(obj);
+            if (obj.TryGetComponent<IPoolable>(out IPoolable poolable))
+                poolable.Released -= Release;
+            
+            Object.Destroy(obj);
         }
 
         private void OnRelease(GameObject obj) => 
