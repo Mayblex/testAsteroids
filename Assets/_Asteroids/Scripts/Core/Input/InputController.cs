@@ -17,19 +17,19 @@ namespace _Asteroids.Scripts.Core.Input
             _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
             _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;
         }
-        
+
+        public void Dispose()
+        {
+            _playerInput.Gameplay.DefaultAtack.performed -= OnDefaultAtackPerformed;
+            _playerInput.Gameplay.SpecialAtack.performed -= OnSpecialAtackPerformed;
+        }
+
         public void ProcessInput()
         {
             ReadMove();
             ReadRotation();
         }
-        
-        private void Dispose()
-        {
-            _playerInput.Gameplay.DefaultAtack.performed -= OnDefaultAtackPerformed;
-            _playerInput.Gameplay.SpecialAtack.performed -= OnSpecialAtackPerformed;
-        }
-        
+
         private void OnDefaultAtackPerformed(InputAction.CallbackContext obj)
         {
             _inputHandler.DefaultAtack();

@@ -1,4 +1,5 @@
-﻿using _Asteroids.Scripts.Core.Factory;
+﻿using System;
+using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
@@ -55,6 +56,11 @@ namespace _Asteroids.Scripts.Core
         private void Update()
         {
             _inputController.ProcessInput();
+        }
+
+        private void OnDestroy()
+        {
+            _inputController.Dispose();
         }
     }
 }
