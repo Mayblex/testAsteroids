@@ -1,6 +1,6 @@
 using UnityEngine.InputSystem;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Core.Input
 {
     public class InputController
     {

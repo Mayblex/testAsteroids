@@ -1,9 +1,11 @@
 ﻿using System.Collections;
-using Scripts.Factory;
+using _Asteroids.Scripts.Core.Factory;
+using _Asteroids.Scripts.Core.Pool;
+using _Asteroids.Scripts.Gameplay.Asteroids;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay.Spawn
 {
     public class Spawner : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-﻿using Scripts.Factory;
+﻿using _Asteroids.Scripts.Core.Factory;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Core.Pool
 {
     public class ObjectPool
     {

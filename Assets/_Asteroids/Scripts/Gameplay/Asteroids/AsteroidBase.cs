@@ -1,8 +1,10 @@
 ﻿using System;
+using _Asteroids.Scripts.Core;
+using _Asteroids.Scripts.Core.Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay.Asteroids
 {
     public abstract class AsteroidBase : MonoBehaviour, IDamageable, IPoolable
     {

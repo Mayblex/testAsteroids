@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay.Ship
 {
     public class Laser : MonoBehaviour
     {

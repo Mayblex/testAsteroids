@@ -1,8 +1,11 @@
-﻿using Scripts;
-using Scripts.Factory;
+﻿using _Asteroids.Scripts.Core.Factory;
+using _Asteroids.Scripts.Core.Input;
+using _Asteroids.Scripts.Gameplay.Ship;
+using _Asteroids.Scripts.Gameplay.Spawn;
+using _Asteroids.Scripts.UI;
 using UnityEngine;
 
-namespace _Asteroids.Scripts
+namespace _Asteroids.Scripts.Core
 {
     public class EntryPoint : MonoBehaviour
     {

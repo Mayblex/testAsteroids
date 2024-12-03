@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _Asteroids.Scripts.Gameplay;
+using UnityEngine;
 
-namespace Scripts.Factory
+namespace _Asteroids.Scripts.Core.Factory
 {
     public class UFOFactory : IFactory
     {

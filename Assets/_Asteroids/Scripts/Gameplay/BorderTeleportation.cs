@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay
 {
     public class BorderTeleportation : MonoBehaviour
     {

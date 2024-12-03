@@ -1,7 +1,9 @@
 ﻿using System;
+using _Asteroids.Scripts.Core;
+using _Asteroids.Scripts.Core.Input;
 using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay.Ship
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable

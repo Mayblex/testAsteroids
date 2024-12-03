@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Core.Pool
 {
     public interface IPoolable
     {

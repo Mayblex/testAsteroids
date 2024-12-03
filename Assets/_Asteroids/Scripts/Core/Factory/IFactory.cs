@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scripts.Factory
+namespace _Asteroids.Scripts.Core.Factory
 {
     public interface IFactory
     {

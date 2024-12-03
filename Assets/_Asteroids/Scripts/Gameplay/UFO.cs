@@ -1,7 +1,9 @@
 ﻿using System;
+using _Asteroids.Scripts.Core;
+using _Asteroids.Scripts.Core.Pool;
 using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay
 {
     public class UFO : MonoBehaviour, IDamageable, IPoolable
     {

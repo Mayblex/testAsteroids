@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using _Asteroids.Scripts.Core;
+using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.Gameplay.Ship
 {
     public class LaserTrigger : MonoBehaviour
     {

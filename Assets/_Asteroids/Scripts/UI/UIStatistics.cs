@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using _Asteroids.Scripts.Gameplay.Ship;
+using TMPro;
 using UnityEngine;
 
-namespace Scripts
+namespace _Asteroids.Scripts.UI
 {
     public class UIStatistics : MonoBehaviour
     {
