@@ -6,10 +6,10 @@ namespace _Asteroids.Scripts.UI
 {
     public class UIStatistics : MonoBehaviour
     {
-        private const string TextSpeed = "Speed: ";
-        private const string TextRotation = "Rotation: ";
-        private const string TextNumberLaser = "Laser: ";
-        private const string TextTimeRecharge = "Time: ";
+        private const string TEXT_SPEED = "Speed: ";
+        private const string TEXT_ROTATION = "Rotation: ";
+        private const string TEXT_NUMBER_LASER = "Laser: ";
+        private const string TEXT_TIME_RECHARGE = "Time: ";
 
         [SerializeField] private TextMeshProUGUI _position;
         [SerializeField] private TextMeshProUGUI _speed;
@@ -40,8 +40,8 @@ namespace _Asteroids.Scripts.UI
         private void Update()
         {
             _position.text = _readonlyShip.Position.ToString("F1");
-            _speed.text = TextSpeed + _readonlyShip.Speed;
-            _rotation.text = TextRotation + _readonlyShip.Rotation;
+            _speed.text = TEXT_SPEED + _readonlyShip.Speed;
+            _rotation.text = TEXT_ROTATION + _readonlyShip.Rotation;
 
             ChangeTime();
         }
@@ -60,10 +60,10 @@ namespace _Asteroids.Scripts.UI
         }
 
         private void NumberLaserUpdate() =>
-            _numberLaser.text = TextNumberLaser + _laser.Number;
+            _numberLaser.text = TEXT_NUMBER_LASER + _laser.Number;
 
         private void TimeRechargeUpdate() =>
-            _timeRecharge.text = TextTimeRecharge + _currentTime.ToString("F1");
+            _timeRecharge.text = TEXT_TIME_RECHARGE + _currentTime.ToString("F1");
 
         private void ChangeTime()
         {
