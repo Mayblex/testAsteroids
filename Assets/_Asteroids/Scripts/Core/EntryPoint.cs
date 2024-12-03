@@ -20,8 +20,8 @@ namespace _Asteroids.Scripts.Core
         private IInputHandler _inputHandler;
         private InputController _inputController;
         private CommonFactory _shipFactory;
-        private CommonFactory _asteroidFactory;
-        private CommonFactory _fragmentAsteroidFactory;
+        private AsteroidFactory _asteroidFactory;
+        private AsteroidFactory _fragmentAsteroidFactory;
         private UFOFactory _ufoFactory;
         private Ship _ship;
         private Laser _laser;
@@ -35,9 +35,9 @@ namespace _Asteroids.Scripts.Core
             _ship.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
-            _asteroidFactory = new CommonFactory(_asteroidPrefab);
-            _fragmentAsteroidFactory = new CommonFactory(_fragmentasteroidPrefab);
-            _ufoFactory = new UFOFactory(_ufoPrefab, _ship.transform);
+            _asteroidFactory = new AsteroidFactory(_asteroidPrefab, 15);
+            _fragmentAsteroidFactory = new AsteroidFactory(_fragmentasteroidPrefab, 22);
+            _ufoFactory = new UFOFactory(_ufoPrefab, 7, _ship.transform);
             _playerInput = new PlayerInput();
             _inputHandler = _player.GetComponent<IInputHandler>();
             _inputController = new InputController(_playerInput, _inputHandler);

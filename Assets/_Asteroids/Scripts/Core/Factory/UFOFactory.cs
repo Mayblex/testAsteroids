@@ -1,4 +1,5 @@
-﻿using _Asteroids.Scripts.Gameplay;
+﻿using _Asteroids.Scripts.Core.Pool;
+using _Asteroids.Scripts.Gameplay;
 using UnityEngine;
 
 namespace _Asteroids.Scripts.Core.Factory
@@ -7,10 +8,12 @@ namespace _Asteroids.Scripts.Core.Factory
     {
         private readonly GameObject _ufoPrefab;
         private readonly Transform _target;
-        
-        public UFOFactory(GameObject ufoPrefab, Transform target)
+        private readonly ObjectPool _ufoPool;
+
+        public UFOFactory(GameObject ufoPrefab, int initialSize,Transform target)
         {
             _ufoPrefab = ufoPrefab;
+            _ufoPool = new ObjectPool(this, initialSize);
             _target = target;
         }
         
@@ -21,5 +24,7 @@ namespace _Asteroids.Scripts.Core.Factory
             ufo.SetTarget(_target);
             return instance;
         }
+
+        public ObjectPool GetPool() => _ufoPool;
     }
 }

@@ -11,12 +11,11 @@ namespace _Asteroids.Scripts.Core.Pool
         private IFactory _factory;
         private Vector2 _position;
 
-        public ObjectPool(IFactory factory, int prewarmObjectsCount, Vector2 position)
+        public ObjectPool(IFactory factory, int initialSize)
         {
             _factory = factory;
             _pool = new ObjectPool<GameObject>(OnCreateObject, OnGetObject, OnRelease, OnObjectDestroy, false,
-                prewarmObjectsCount);
-            _position = position;
+                initialSize);
         }
 
         public GameObject Get()
