@@ -1,5 +1,4 @@
-﻿using System;
-using _Asteroids.Scripts.Core.Factory;
+﻿using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
