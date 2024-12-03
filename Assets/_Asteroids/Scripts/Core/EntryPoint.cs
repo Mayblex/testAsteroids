@@ -19,9 +19,9 @@ namespace _Asteroids.Scripts.Core
         private PlayerInput _playerInput;
         private IInputHandler _inputHandler;
         private InputController _inputController;
-        private ShipFactory _shipFactory;
-        private AsteroidFactory _asteroidFactory;
-        private AsteroidFactory _fragmentAsteroidFactory;
+        private CommonFactory _shipFactory;
+        private CommonFactory _asteroidFactory;
+        private CommonFactory _fragmentAsteroidFactory;
         private UFOFactory _ufoFactory;
         private Ship _ship;
         private Laser _laser;
@@ -29,14 +29,14 @@ namespace _Asteroids.Scripts.Core
 
         private void Awake()
         {
-            _shipFactory = new ShipFactory(_shipPrefab);
+            _shipFactory = new CommonFactory(_shipPrefab);
             _player = _shipFactory.Create(Vector2.zero);
             _ship = _player.GetComponent<Ship>();
             _ship.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
-            _asteroidFactory = new AsteroidFactory(_asteroidPrefab);
-            _fragmentAsteroidFactory = new AsteroidFactory(_fragmentasteroidPrefab);
+            _asteroidFactory = new CommonFactory(_asteroidPrefab);
+            _fragmentAsteroidFactory = new CommonFactory(_fragmentasteroidPrefab);
             _ufoFactory = new UFOFactory(_ufoPrefab, _ship.transform);
             _playerInput = new PlayerInput();
             _inputHandler = _player.GetComponent<IInputHandler>();

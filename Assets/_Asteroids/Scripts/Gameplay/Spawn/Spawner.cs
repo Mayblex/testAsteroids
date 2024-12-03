@@ -17,8 +17,8 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         [SerializeField] private int _numberAsteroid;
         [SerializeField] private int _numberUFO;
 
-        private AsteroidFactory _asteroidFactory;
-        private AsteroidFactory _fragmentAsteroidFactory;
+        private CommonFactory _asteroidFactory;
+        private CommonFactory _fragmentAsteroidFactory;
         private UFOFactory _ufoFactory;
         private ObjectPool _asteroidPool;
         private ObjectPool _fragmentAsteroidPool;
@@ -26,7 +26,7 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         private float _time = 25f;
         private float _deltaTime = 7f;
 
-        public void Constract(AsteroidFactory asteroidFactory, AsteroidFactory fragmentAsteroidFactory,
+        public void Constract(CommonFactory asteroidFactory, CommonFactory fragmentAsteroidFactory,
             UFOFactory ufoFactory)
         {
             _asteroidFactory = asteroidFactory;
