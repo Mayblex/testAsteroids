@@ -9,10 +9,10 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
 {
     public class Spawner : MonoBehaviour
     {
-        private const float ValidToY = 16f;
-        private const float ValidToX = 33f;
-        private const float InvalidToX = 26f;
-        private const float InvalidToY = 12f;
+        private const float VALID_TO_Y = 16f;
+        private const float VALID_TO_X = 33f;
+        private const float INVALID_TO_X = 26f;
+        private const float INVALID_TO_Y = 12f;
 
         [SerializeField] private int _numberAsteroid;
         [SerializeField] private int _numberUFO;
@@ -78,10 +78,10 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         {
             Vector3 position = Vector3.zero;
 
-            while (position.x < InvalidToX && position.y < InvalidToY)
+            while (position.x < INVALID_TO_X && position.y < INVALID_TO_Y)
             {
-                position.y = Random.Range(-ValidToY, ValidToY);
-                position.x = Random.Range(-ValidToX, ValidToX);
+                position.y = Random.Range(-VALID_TO_Y, VALID_TO_Y);
+                position.x = Random.Range(-VALID_TO_X, VALID_TO_X);
             }
 
             return position;
