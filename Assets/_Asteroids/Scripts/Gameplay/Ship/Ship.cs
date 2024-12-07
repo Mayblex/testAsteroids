@@ -17,7 +17,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         private Vector2 _moveDirection;
         private float _rotationZ;
 
-        public void Constract(Laser laser)
+        public void Construct(Laser laser)
         {
             _laser = laser;
         }

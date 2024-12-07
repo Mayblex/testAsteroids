@@ -23,7 +23,7 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         private float _time = 25f;
         private float _deltaTime = 7f;
 
-        public void Constract(AsteroidFactory asteroidFactory, AsteroidFactory fragmentAsteroidFactory,
+        public void Construct(AsteroidFactory asteroidFactory, AsteroidFactory fragmentAsteroidFactory,
             UFOFactory ufoFactory)
         {
             _ufoPool = ufoFactory.GetPool();

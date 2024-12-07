@@ -21,7 +21,7 @@ namespace _Asteroids.Scripts.UI
         private Laser _laser;
         private float _currentTime;
         
-        public void Constract(IReadonlyShip readonlyShip, Laser laser)
+        public void Construct(IReadonlyShip readonlyShip, Laser laser)
         {
             _readonlyShip = readonlyShip;
             _laser = laser;

@@ -45,10 +45,10 @@ namespace _Asteroids.Scripts.Core
 
         private void Start()
         {
-            _ship.Constract(_laser);
-            _uiStatistics.Constract(_ship, _laser);
+            _ship.Construct(_laser);
+            _uiStatistics.Construct(_ship, _laser);
             _uiStatistics.Run();
-            _spawner.Constract(_asteroidFactory, _fragmentAsteroidFactory, _ufoFactory);
+            _spawner.Construct(_asteroidFactory, _fragmentAsteroidFactory, _ufoFactory);
             _spawner.Run();
         }
 
