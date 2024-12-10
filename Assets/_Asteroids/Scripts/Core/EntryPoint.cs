@@ -2,8 +2,10 @@
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
+using _Asteroids.Scripts.Installers;
 using _Asteroids.Scripts.UI;
 using UnityEngine;
+using Zenject;
 
 namespace _Asteroids.Scripts.Core
 {
@@ -14,14 +16,13 @@ namespace _Asteroids.Scripts.Core
         [SerializeField] private GameObject _asteroidPrefab;
         [SerializeField] private GameObject _fragmentasteroidPrefab;
         [SerializeField] private GameObject _ufoPrefab;
-        [SerializeField] private GameObject _shipPrefab;
 
         private PlayerInput _playerInput;
         private IInputHandler _inputHandler;
         private InputController _inputController;
-        private CommonFactory _shipFactory;
-        private AsteroidFactory _asteroidFactory;
-        private AsteroidFactory _fragmentAsteroidFactory;
+        [Inject] private CommonFactory _shipFactory;
+        [Inject(Id = InstallerIds.ASTEROID_FACTORY)] private AsteroidFactory _asteroidFactory;
+        [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)] private AsteroidFactory _fragmentAsteroidFactory;
         private UFOFactory _ufoFactory;
         private Ship _ship;
         private Laser _laser;
@@ -29,14 +30,11 @@ namespace _Asteroids.Scripts.Core
 
         private void Awake()
         {
-            _shipFactory = new CommonFactory(_shipPrefab);
             _player = _shipFactory.Create(Vector2.zero);
             _ship = _player.GetComponent<Ship>();
             _ship.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
-            _asteroidFactory = new AsteroidFactory(_asteroidPrefab, 15);
-            _fragmentAsteroidFactory = new AsteroidFactory(_fragmentasteroidPrefab, 22);
             _ufoFactory = new UFOFactory(_ufoPrefab, 7, _ship.transform);
             _playerInput = new PlayerInput();
             _inputHandler = _player.GetComponent<IInputHandler>();
