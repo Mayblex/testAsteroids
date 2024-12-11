@@ -32,7 +32,6 @@ namespace _Asteroids.Scripts.Core
             _ship.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
-            //_ufoFactory = new UFOFactory(_ufoPrefab, 7, _ship.transform);
             _playerInput = new PlayerInput();
             _inputHandler = _player.GetComponent<IInputHandler>();
             _inputController = new InputController(_playerInput, _inputHandler);
