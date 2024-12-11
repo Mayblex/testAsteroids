@@ -13,17 +13,15 @@ namespace _Asteroids.Scripts.Core
     {
         [SerializeField] private UIStatistics _uiStatistics;
         [SerializeField] private Spawner _spawner;
-        [SerializeField] private GameObject _asteroidPrefab;
-        [SerializeField] private GameObject _fragmentasteroidPrefab;
         [SerializeField] private GameObject _ufoPrefab;
 
         private PlayerInput _playerInput;
         private IInputHandler _inputHandler;
         private InputController _inputController;
-        [Inject] private CommonFactory _shipFactory;
+        [Inject] private ShipFactory _shipFactory;
         [Inject(Id = InstallerIds.ASTEROID_FACTORY)] private AsteroidFactory _asteroidFactory;
         [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)] private AsteroidFactory _fragmentAsteroidFactory;
-        private UFOFactory _ufoFactory;
+        [Inject] private UFOFactory _ufoFactory;
         private Ship _ship;
         private Laser _laser;
         private GameObject _player;
@@ -35,7 +33,7 @@ namespace _Asteroids.Scripts.Core
             _ship.Initialize();
             _laser = _player.GetComponentInChildren<Laser>();
             _laser.Initialize();
-            _ufoFactory = new UFOFactory(_ufoPrefab, 7, _ship.transform);
+            //_ufoFactory = new UFOFactory(_ufoPrefab, 7, _ship.transform);
             _playerInput = new PlayerInput();
             _inputHandler = _player.GetComponent<IInputHandler>();
             _inputController = new InputController(_playerInput, _inputHandler);

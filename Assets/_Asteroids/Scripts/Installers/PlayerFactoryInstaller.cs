@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Core.Factory;
+using _Asteroids.Scripts.Gameplay.Ship;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,12 @@ namespace _Asteroids.Scripts.Installers
         public override void InstallBindings()
         {
             Container.
-                Bind<CommonFactory>().
+                Bind<ShipHolder>().
+                AsSingle().
+                NonLazy();
+            
+            Container.
+                Bind<ShipFactory>().
                 AsSingle().
                 WithArguments(_shipPrefab, Container);
         }
