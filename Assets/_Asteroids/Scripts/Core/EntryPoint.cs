@@ -13,7 +13,6 @@ namespace _Asteroids.Scripts.Core
     {
         [SerializeField] private UIStatistics _uiStatistics;
         [SerializeField] private Spawner _spawner;
-        [SerializeField] private GameObject _ufoPrefab;
 
         private PlayerInput _playerInput;
         private IInputHandler _inputHandler;
