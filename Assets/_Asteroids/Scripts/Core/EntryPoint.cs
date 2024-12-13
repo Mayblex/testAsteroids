@@ -2,7 +2,6 @@
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
-using _Asteroids.Scripts.Installers;
 using _Asteroids.Scripts.UI;
 using UnityEngine;
 using Zenject;
@@ -18,9 +17,6 @@ namespace _Asteroids.Scripts.Core
         private IInputHandler _inputHandler;
         [Inject] private InputController _inputController;
         [Inject] private ShipFactory _shipFactory;
-        [Inject(Id = InstallerIds.ASTEROID_FACTORY)] private AsteroidFactory _asteroidFactory;
-        [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)] private AsteroidFactory _fragmentAsteroidFactory;
-        [Inject] private UFOFactory _ufoFactory;
         private Ship _ship;
         private Laser _laser;
         private GameObject _player;

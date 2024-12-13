@@ -2,7 +2,9 @@
 using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Pool;
 using _Asteroids.Scripts.Gameplay.Asteroids;
+using _Asteroids.Scripts.Installers;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace _Asteroids.Scripts.Gameplay.Spawn
@@ -23,7 +25,9 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         private float _time = 25f;
         private float _deltaTime = 7f;
         
-        public void Construct(AsteroidFactory asteroidFactory, AsteroidFactory fragmentAsteroidFactory,
+        [Inject]
+        public void Construct([Inject(Id = InstallerIds.ASTEROID_FACTORY)] AsteroidFactory asteroidFactory,
+            [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)] AsteroidFactory fragmentAsteroidFactory,
             UFOFactory ufoFactory)
         {
             _ufoPool = ufoFactory.GetPool();
