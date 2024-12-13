@@ -14,7 +14,6 @@ namespace _Asteroids.Scripts.Core
         [SerializeField] private Spawner _spawner;
         
         [Inject] private PlayerInput _playerInput;
-        private IInputHandler _inputHandler;
         [Inject] private InputController _inputController;
         [Inject] private ShipFactory _shipFactory;
         private Ship _ship;
@@ -29,10 +28,8 @@ namespace _Asteroids.Scripts.Core
             _ship.Initialize();
             _laser.Initialize();
             _inputController.Initialize();
-            //_inputHandler = _player.GetComponent<IInputHandler>();
-            //_inputController = new InputController(_playerInput, _inputHandler);
         }
-
+        
         private void Start()
         {
             _ship.Construct(_laser);
