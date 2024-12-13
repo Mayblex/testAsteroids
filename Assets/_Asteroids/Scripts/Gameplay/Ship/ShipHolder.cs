@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Asteroids.Scripts.Core.Input;
+using UnityEngine;
 
 namespace _Asteroids.Scripts.Gameplay.Ship
 {
@@ -9,6 +10,11 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         public void SetShip(GameObject ship)
         {
             Ship = ship;
-        } 
+        }
+
+        public IInputHandler GetInputHandler()
+        {
+            return Ship.GetComponent<IInputHandler>();
+        }
     }
 }
