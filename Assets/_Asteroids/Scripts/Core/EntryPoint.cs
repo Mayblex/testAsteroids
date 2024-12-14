@@ -10,30 +10,28 @@ namespace _Asteroids.Scripts.Core
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private UIStatistics _uiStatistics;
-        [SerializeField] private Spawner _spawner;
-        
+        [Inject] private UIStatistics _uiStatistics;
+        [Inject] private Spawner _spawner;
         [Inject] private PlayerInput _playerInput;
         [Inject] private InputController _inputController;
         [Inject] private ShipFactory _shipFactory;
+        [Inject] private ShipHolder _shipHolder;
         private Ship _ship;
         private Laser _laser;
-        private GameObject _player;
         
         private void Awake()
         {
-            _player = _shipFactory.Create(Vector2.zero);
-            _ship = _player.GetComponent<Ship>();
-            _laser = _player.GetComponentInChildren<Laser>();
+            _shipFactory.Create(Vector2.zero);
+            _ship = _shipHolder.Ship.GetComponent<Ship>();
+            _laser = _shipHolder.GetLaser();
             _ship.Initialize();
             _laser.Initialize();
             _inputController.Initialize();
+            _uiStatistics.Initialize();
         }
         
         private void Start()
         {
-            _ship.Construct(_laser);
-            _uiStatistics.Construct(_ship, _laser);
             _uiStatistics.Run();
             _spawner.Run();
         }

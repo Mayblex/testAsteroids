@@ -7,14 +7,16 @@ namespace _Asteroids.Scripts.Gameplay.Ship
     {
         public GameObject Ship { get; private set; }
 
-        public void SetShip(GameObject ship)
-        {
+        public void SetShip(GameObject ship) => 
             Ship = ship;
-        }
 
-        public IInputHandler GetInputHandler()
-        {
-            return Ship.GetComponent<IInputHandler>();
-        }
+        public IInputHandler GetInputHandler() => 
+            Ship.GetComponent<IInputHandler>();
+
+        public IReadonlyShip GetReadonlyShip() => 
+            Ship.GetComponent<IReadonlyShip>();
+
+        public Laser GetLaser() => 
+            Ship.GetComponentInChildren<Laser>();
     }
 }

@@ -238,6 +238,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 110616789587021764, guid: b55ab0ef9c85bf44b84eedc772342c90, type: 3}
   _moveSpeed: 12
   _rotationSpeed: 2.1
+  _laser: {fileID: 2423288863096121459}
 --- !u!114 &1555414435988592958
 MonoBehaviour:
   m_ObjectHideFlags: 0
