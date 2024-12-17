@@ -10,14 +10,14 @@ namespace _Asteroids.Scripts.Core.Factory
     {
         private readonly GameObject _ufoPrefab;
         private readonly Transform _target;
-        private readonly ObjectPool _ufoPool;
+        private readonly CustomObjectPool<UFO> _ufoPool;
         private readonly ShipHolder _shipHolder;
         private readonly DiContainer _container;
 
         public UFOFactory(GameObject ufoPrefab, int initialSize, ShipHolder shipHolder, DiContainer container)
         {
             _ufoPrefab = ufoPrefab;
-            _ufoPool = new ObjectPool(this, initialSize);
+            _ufoPool = new CustomObjectPool<UFO>(this, initialSize);
             _shipHolder = shipHolder;
             _container = container;
         }
@@ -30,6 +30,6 @@ namespace _Asteroids.Scripts.Core.Factory
             return instance;
         }
 
-        public ObjectPool GetPool() => _ufoPool;
+        public CustomObjectPool<UFO> GetPool() => _ufoPool;
     }
 }

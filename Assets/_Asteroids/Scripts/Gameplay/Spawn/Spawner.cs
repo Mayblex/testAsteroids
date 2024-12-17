@@ -19,9 +19,9 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         [SerializeField] private int _numberAsteroid;
         [SerializeField] private int _numberUFO;
         
-        private ObjectPool _asteroidPool;
-        private ObjectPool _fragmentAsteroidPool;
-        private ObjectPool _ufoPool;
+        private CustomObjectPool<AsteroidBase> _asteroidPool;
+        private CustomObjectPool<AsteroidBase> _fragmentAsteroidPool;
+        private CustomObjectPool<UFO> _ufoPool;
         private float _time = 25f;
         private float _deltaTime = 7f;
         
