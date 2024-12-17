@@ -10,14 +10,24 @@ namespace _Asteroids.Scripts.Core
 {
     public class EntryPoint : MonoBehaviour
     {
-        [Inject] private UIStatistics _uiStatistics;
-        [Inject] private Spawner _spawner;
-        [Inject] private PlayerInput _playerInput;
-        [Inject] private InputController _inputController;
-        [Inject] private ShipFactory _shipFactory;
-        [Inject] private ShipHolder _shipHolder;
+        private UIStatistics _uiStatistics;
+        private Spawner _spawner;
+        private InputController _inputController;
+        private ShipFactory _shipFactory;
+        private ShipHolder _shipHolder;
         private Ship _ship;
         private Laser _laser;
+        
+        [Inject]
+        public void Construct(UIStatistics uiStatistics, Spawner spawner, InputController inputController,
+            ShipFactory shipFactory, ShipHolder shipHolder)
+        {
+            _uiStatistics = uiStatistics;
+            _spawner = spawner;
+            _inputController = inputController;
+            _shipFactory = shipFactory;
+            _shipHolder = shipHolder;
+        }
         
         private void Awake()
         {
