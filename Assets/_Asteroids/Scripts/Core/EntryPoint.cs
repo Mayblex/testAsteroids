@@ -51,6 +51,7 @@ namespace _Asteroids.Scripts.Core
         public void Tick()
         {
             _inputController.ProcessInput();
+            _uiStatistics.UpdateText();
         }
 
         public void Dispose()

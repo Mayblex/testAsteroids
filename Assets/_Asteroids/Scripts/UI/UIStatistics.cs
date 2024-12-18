@@ -44,8 +44,8 @@ namespace _Asteroids.Scripts.UI
             NumberLaserUpdate();
             TimeRechargeUpdate();
         }
-        
-        private void Update()
+
+        public void UpdateText()
         {
             _position.text = _readonlyShip.Position.ToString("F1");
             _speed.text = TEXT_SPEED + _readonlyShip.Speed;
