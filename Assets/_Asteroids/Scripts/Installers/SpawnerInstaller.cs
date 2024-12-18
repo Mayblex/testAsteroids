@@ -9,7 +9,6 @@ namespace _Asteroids.Scripts.Installers
         {
             Container.
                 Bind<Spawner>().
-                FromComponentInHierarchy().
                 AsSingle();
         }
     }

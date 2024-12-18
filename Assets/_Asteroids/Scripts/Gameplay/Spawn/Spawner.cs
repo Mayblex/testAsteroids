@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Asteroids.Scripts.Core;
 using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Pool;
 using _Asteroids.Scripts.Gameplay.Asteroids;
@@ -9,36 +10,37 @@ using Random = UnityEngine.Random;
 
 namespace _Asteroids.Scripts.Gameplay.Spawn
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner
     {
         private const float VALID_TO_Y = 16f;
         private const float VALID_TO_X = 33f;
         private const float INVALID_TO_X = 26f;
         private const float INVALID_TO_Y = 12f;
         
-        [SerializeField] private int _numberAsteroid;
-        [SerializeField] private int _numberUFO;
-        
-        private CustomObjectPool<AsteroidBase> _asteroidPool;
-        private CustomObjectPool<AsteroidBase> _fragmentAsteroidPool;
-        private CustomObjectPool<UFO> _ufoPool;
+        private readonly CustomObjectPool<AsteroidBase> _asteroidPool;
+        private readonly CustomObjectPool<AsteroidBase> _fragmentAsteroidPool;
+        private readonly CustomObjectPool<UFO> _ufoPool;
+        private readonly CoroutineRunner _coroutineRunner;
+        private int _numberAsteroid = 3;
+        private int _numberUFO = 1;
         private float _time = 25f;
         private float _deltaTime = 7f;
         
-        [Inject]
-        public void Construct([Inject(Id = InstallerIds.ASTEROID_FACTORY)] AsteroidFactory asteroidFactory,
-            [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)] AsteroidFactory fragmentAsteroidFactory,
-            UFOFactory ufoFactory)
+        public Spawner([Inject(Id = InstallerIds.ASTEROID_FACTORY)] AsteroidFactory asteroidFactory,
+            [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)]
+            AsteroidFactory fragmentAsteroidFactory,
+            UFOFactory ufoFactory, CoroutineRunner coroutineRunner)
         {
             _ufoPool = ufoFactory.GetPool();
             _asteroidPool = asteroidFactory.GetPool();
             _fragmentAsteroidPool = fragmentAsteroidFactory.GetPool();
+            _coroutineRunner = coroutineRunner;
         }
         
         public void Run()
         {
             Spawn(_numberAsteroid, _numberUFO);
-            StartCoroutine(SpawnObjectsAfterTime());
+            _coroutineRunner.StartRoutine(SpawnObjectsAfterTime());
         }
         
         private IEnumerator SpawnObjectsAfterTime()
@@ -50,8 +52,8 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
                 Spawn(_numberAsteroid, _numberUFO);
 
                 _time += _deltaTime;
-                _numberAsteroid += _numberAsteroid;
-                _numberUFO += _numberUFO;
+                _numberAsteroid += 2;
+                _numberUFO += 1;
             }
         }
         
