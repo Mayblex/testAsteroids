@@ -1,4 +1,5 @@
-﻿using _Asteroids.Scripts.Core.Factory;
+﻿using System;
+using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
@@ -8,18 +9,17 @@ using Zenject;
 
 namespace _Asteroids.Scripts.Core
 {
-    public class EntryPoint : MonoBehaviour
+    public class EntryPoint : IInitializable, ITickable, IDisposable
     {
-        private UIStatistics _uiStatistics;
-        private Spawner _spawner;
-        private InputController _inputController;
-        private ShipFactory _shipFactory;
-        private ShipHolder _shipHolder;
+        private readonly UIStatistics _uiStatistics;
+        private readonly Spawner _spawner;
+        private readonly InputController _inputController;
+        private readonly ShipFactory _shipFactory;
+        private readonly ShipHolder _shipHolder;
         private Ship _ship;
         private Laser _laser;
         
-        [Inject]
-        public void Construct(UIStatistics uiStatistics, Spawner spawner, InputController inputController,
+        public EntryPoint(UIStatistics uiStatistics, Spawner spawner, InputController inputController,
             ShipFactory shipFactory, ShipHolder shipHolder)
         {
             _uiStatistics = uiStatistics;
@@ -28,8 +28,8 @@ namespace _Asteroids.Scripts.Core
             _shipFactory = shipFactory;
             _shipHolder = shipHolder;
         }
-        
-        private void Awake()
+
+        public void Initialize()
         {
             _shipFactory.Create(Vector2.zero);
             _ship = _shipHolder.Ship.GetComponent<Ship>();
@@ -38,20 +38,22 @@ namespace _Asteroids.Scripts.Core
             _laser.Initialize();
             _inputController.Initialize();
             _uiStatistics.Initialize();
+            
+            StartGame();
         }
         
-        private void Start()
+        private void StartGame()
         {
             _uiStatistics.Run();
             _spawner.Run();
         }
-        
-        private void Update()
+
+        public void Tick()
         {
             _inputController.ProcessInput();
         }
-        
-        private void OnDestroy()
+
+        public void Dispose()
         {
             _inputController.Dispose();
         }
