@@ -4,5 +4,6 @@
     {
         public const string ASTEROID_FACTORY = "AsteroidFactory";
         public const string FRAGMENT_ASTEROID_FACTORY = "FragmentAsteroidFactory";
+        public const string COROUTINE_RUNNER = "CoroutineRunner";
     }
 }
