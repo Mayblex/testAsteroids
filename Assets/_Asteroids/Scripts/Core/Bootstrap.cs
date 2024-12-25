@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using _Asteroids.Scripts.Services;
+﻿using _Asteroids.Scripts.Services;
 using UnityEngine;
 using Zenject;
 
