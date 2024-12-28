@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Core.Pool;
+using _Asteroids.Scripts.Data;
 using _Asteroids.Scripts.Gameplay;
 using _Asteroids.Scripts.Gameplay.Ship;
 using UnityEngine;
@@ -14,10 +15,10 @@ namespace _Asteroids.Scripts.Core.Factory
         private readonly ShipHolder _shipHolder;
         private readonly DiContainer _container;
 
-        public UFOFactory(GameObject ufoPrefab, int initialSize, ShipHolder shipHolder, DiContainer container)
+        public UFOFactory(GameObject ufoPrefab, int initialSize, ShipHolder shipHolder, DiContainer container, GameplayStatistics gameplayStatistics)
         {
             _ufoPrefab = ufoPrefab;
-            _ufoPool = new CustomObjectPool<UFO>(this, initialSize);
+            _ufoPool = new CustomObjectPool<UFO>(this, initialSize, gameplayStatistics);
             _shipHolder = shipHolder;
             _container = container;
         }
