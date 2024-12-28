@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 161728e7c85ad0042ad9dacca5956c91
+    path: Assets/_Asteroids/Scenes/Bootstrap.unity
+    guid: 2d04ea7d9a74cea4892de7989e45ca20
+  - enabled: 1
+    path: Assets/_Asteroids/Scenes/MainScene.unity
+    guid: 7caa234af910b9948a26642076a2db6f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b83822a13a2d8fd42b37dc9c372a46aa, type: 3}
   m_UseUCBPForAssetBundles: 0
