@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Core.Pool;
+using _Asteroids.Scripts.Data;
 using _Asteroids.Scripts.Gameplay.Asteroids;
 using UnityEngine;
 using Zenject;
@@ -11,10 +12,10 @@ namespace _Asteroids.Scripts.Core.Factory
         private readonly CustomObjectPool<AsteroidBase> _pool;
         private readonly DiContainer _container;
 
-        public AsteroidFactory(GameObject prefab, int initialSize, DiContainer container)
+        public AsteroidFactory(GameObject prefab, int initialSize, DiContainer container, GameplayStatistics gameplayStatistics)
         {
             _prefab = prefab;
-            _pool = new CustomObjectPool<AsteroidBase>(this, initialSize);
+            _pool = new CustomObjectPool<AsteroidBase>(this, initialSize, gameplayStatistics);
             _container = container;
         }
         
