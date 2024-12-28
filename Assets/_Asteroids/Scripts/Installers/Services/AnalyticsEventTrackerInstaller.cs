@@ -9,7 +9,7 @@ namespace _Asteroids.Scripts.Installers.Services
         {
             Container.
                 Bind<AnalyticsEventTracker>().
-                AsSingle();
+                AsSingle().NonLazy();
         }
     }
 }
