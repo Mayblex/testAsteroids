@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
+using Firebase.Extensions;
 
 namespace _Asteroids.Scripts.Services
 {
@@ -8,9 +9,11 @@ namespace _Asteroids.Scripts.Services
     {
         public async Task Initialize()
         {
-            await FirebaseApp.CheckAndFixDependenciesAsync();
-
-            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
+                FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+                var app = FirebaseApp.DefaultInstance;
+            });
         }
 
         public void LogEvent(string eventName) =>
