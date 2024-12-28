@@ -18,6 +18,8 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         private float _rotationZ;
         
         public event Action Died;
+        public event Action BulletShot;
+        public event Action LaserShot;
         
         public Vector2 Position { get; private set; }
         public float Speed { get; private set; }
@@ -55,12 +57,18 @@ namespace _Asteroids.Scripts.Gameplay.Ship
             _rigidbody.angularVelocity = Vector3.forward * (_rotationZ * _rotationSpeed);
         }
         
-        public void DefaultAtack() => 
+        public void DefaultAtack()
+        {
             Instantiate(_bulletPrefab, transform.position, transform.rotation);
-        
-        public void SpecialAtack() => 
+            BulletShot?.Invoke();
+        }
+
+        public void SpecialAtack()
+        {
             _laser.Shoot();
-        
+            LaserShot?.Invoke();
+        }
+
         public void TakeDamage()
         {
             Died?.Invoke();
