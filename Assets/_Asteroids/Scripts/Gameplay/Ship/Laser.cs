@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections;
+using _Asteroids.Scripts.Configs;
+using _Asteroids.Scripts.Services;
 using UnityEngine;
+using Zenject;
 
 namespace _Asteroids.Scripts.Gameplay.Ship
 {
     public class Laser : MonoBehaviour
     {
+        private const string LASER_CONFIG = "laser_config";
+        
         [SerializeField] private GameObject _view;
         [SerializeField] private float _lifeTime = 0.6f;
         [SerializeField] private int _maxNumber = 3;
         
         private bool _canCharge = true;
+        private LaserConfig _config;
+        private IRemoteConfigService _configService;
+
+        [Inject]
+        public void Construct(IRemoteConfigService configService)
+        {
+            _configService = configService;
+        }
         
         public event Action NumberChanged;
         public event Action RechargeStarted;
@@ -20,6 +33,10 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         public void Initialize()
         {
+            _config = _configService.GetValue<LaserConfig>(LASER_CONFIG);
+            _lifeTime = _config.LifeTime;
+            _maxNumber = _config.MaxNumber;
+            TimeRecharge = _config.TimeRecharge;
             NumberChanged?.Invoke();
         }
         

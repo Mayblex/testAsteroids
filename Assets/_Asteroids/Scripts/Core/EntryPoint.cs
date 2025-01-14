@@ -42,6 +42,7 @@ namespace _Asteroids.Scripts.Core
             _laser = _shipHolder.GetLaser();
             _ship.Initialize();
             _laser.Initialize();
+            _spawner.Initialize();
             _inputController.Initialize();
             _uiStatistics.Initialize();
             _analyticsEventTracker.Initialize();

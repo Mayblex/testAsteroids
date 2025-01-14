@@ -1,13 +1,18 @@
 ﻿using System;
+using _Asteroids.Scripts.Configs;
 using _Asteroids.Scripts.Core;
 using _Asteroids.Scripts.Core.Input;
+using _Asteroids.Scripts.Services;
 using UnityEngine;
+using Zenject;
 
 namespace _Asteroids.Scripts.Gameplay.Ship
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable
     {
+        private const string SHIP_CONFIG = "ship_config";
+        
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
@@ -16,6 +21,14 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
         private float _rotationZ;
+        private ShipConfig _config;
+        private IRemoteConfigService _configService;
+        
+        [Inject]
+        public void Construct(IRemoteConfigService configService)
+        {
+            _configService = configService;
+        }
         
         public event Action Died;
         public event Action BulletShot;
@@ -28,6 +41,9 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _config = _configService.GetValue<ShipConfig>(SHIP_CONFIG);
+            _moveSpeed = _config.MoveSpeed;
+            _rotationSpeed = _config.RotationSpeed;
         }
         
         private void Update()
