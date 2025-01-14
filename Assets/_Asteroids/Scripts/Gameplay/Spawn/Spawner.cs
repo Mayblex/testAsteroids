@@ -18,7 +18,7 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         private const float VALID_TO_X = 33f;
         private const float INVALID_TO_X = 26f;
         private const float INVALID_TO_Y = 12f;
-        private const string SPAWNER_CONFIG = "spawner_config";
+        private const string SPAWNER_CONFIG = "spawnerConfig";
 
         private readonly CustomObjectPool<AsteroidBase> _asteroidPool;
         private readonly CustomObjectPool<AsteroidBase> _fragmentAsteroidPool;

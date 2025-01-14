@@ -9,7 +9,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
 {
     public class Laser : MonoBehaviour
     {
-        private const string LASER_CONFIG = "laser_config";
+        private const string LASER_CONFIG = "laserConfig";
         
         [SerializeField] private GameObject _view;
         [SerializeField] private float _lifeTime = 0.6f;

@@ -10,7 +10,7 @@ namespace _Asteroids.Scripts.Gameplay
 {
     public class UFO : MonoBehaviour, IDamageable, IPoolable
     {
-        private const string UFO_CONFIG = "ufo_config";
+        private const string UFO_CONFIG = "ufoConfig";
         
         [SerializeField] private float _speed = 5f;
         

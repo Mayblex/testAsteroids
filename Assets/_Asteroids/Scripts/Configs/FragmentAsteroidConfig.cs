@@ -3,6 +3,6 @@
     [System.Serializable]
     public class FragmentAsteroidConfig
     {
-        public float Speed;
+        public float Speed = 5f;
     }
 }

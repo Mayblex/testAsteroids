@@ -4,7 +4,7 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
 {
     public class FragmentAsteroid : AsteroidBase
     {
-        private const string FRAGMENT_ASTEROID_CONFIG = "fragment_asteroid_config";
+        private const string FRAGMENT_ASTEROID_CONFIG = "fragmentAsteroidConfig";
 
         private FragmentAsteroidConfig _config;
 

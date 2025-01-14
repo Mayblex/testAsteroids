@@ -11,7 +11,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
     [RequireComponent(typeof(Rigidbody))]
     public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable
     {
-        private const string SHIP_CONFIG = "ship_config";
+        private const string SHIP_CONFIG = "shipConfig";
         
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _moveSpeed = 10f;

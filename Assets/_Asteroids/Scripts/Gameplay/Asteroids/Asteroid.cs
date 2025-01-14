@@ -6,7 +6,7 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
 {
     public class Asteroid : AsteroidBase
     {
-        private const string ASTEROID_CONFIG = "asteroid_config";
+        private const string ASTEROID_CONFIG = "asteroidConfig";
         
         private AsteroidConfig _config;
         
