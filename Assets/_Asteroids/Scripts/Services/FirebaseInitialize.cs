@@ -7,7 +7,7 @@ namespace _Asteroids.Scripts.Services
 {
     public class FirebaseInitialize
     {
-        public async Task InitializeFirebase()
+        public async Task Initialize()
         {
             await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {

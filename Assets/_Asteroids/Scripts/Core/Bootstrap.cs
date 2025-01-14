@@ -7,19 +7,25 @@ namespace _Asteroids.Scripts.Core
     public class Bootstrap : IInitializable
     {
         private readonly ZenjectSceneLoader _sceneLoader;
+        private readonly FirebaseInitialize _firebaseInitialize;
         private readonly IAnalyticsService _analyticsService;
+        private readonly IRemoteConfigService _configService;
         
-        public Bootstrap(ZenjectSceneLoader sceneLoader, IAnalyticsService analyticsService)
+        public Bootstrap(ZenjectSceneLoader sceneLoader, IAnalyticsService analyticsService, IRemoteConfigService configService)
         {
             _sceneLoader = sceneLoader;
+            _firebaseInitialize = new FirebaseInitialize();
             _analyticsService = analyticsService;
+            _configService = configService;
         }
         
         public async void Initialize()
         {
             Debug.Log("Start");
-            
+
+            await _firebaseInitialize.Initialize();
             await _analyticsService.Initialize();
+            await _configService.Initialize();
             
             _sceneLoader.LoadScene("MainScene");
         }
