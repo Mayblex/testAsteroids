@@ -6,13 +6,11 @@ namespace _Asteroids.Scripts.Services
     public class AnalyticsEventTracker
     {
         private readonly IAnalyticsService _analyticsService;
-        private readonly GameplayStatistics _gameplayStatistics;
         private readonly ShipHolder _shipHolder;
 
-        public AnalyticsEventTracker(ShipHolder shipHolder, IAnalyticsService analyticsService, GameplayStatistics gameplayStatistics)
+        public AnalyticsEventTracker(ShipHolder shipHolder, IAnalyticsService analyticsService)
         {
             _analyticsService = analyticsService;
-            _gameplayStatistics = gameplayStatistics;
             _shipHolder = shipHolder;
         }
 
@@ -22,24 +20,8 @@ namespace _Asteroids.Scripts.Services
             _shipHolder.Ship.GetComponent<Ship>().LaserShot += OnLaserShot;
         }
 
-        public void LogStartGameEvent() =>
-            _analyticsService.LogEvent(AnalyticsEventName.GAME_START);
+        private void OnShipDied() => _analyticsService.LogGameOver();
 
-        private void LogEndGameEvent()
-        {
-            _analyticsService.LogEvent(AnalyticsEventName.GAME_OVER,
-                (AnalyticsEventName.BULLET_SHOT, _gameplayStatistics.BulletShots),
-                (AnalyticsEventName.LASER_SHOTS, _gameplayStatistics.LaserShots),
-                (AnalyticsEventName.DESTROYED_ASTEROIDS, _gameplayStatistics.DestroyedAsteroids),
-                (AnalyticsEventName.DESTROYED_UFOS, _gameplayStatistics.DestroyedUFOs)
-            );
-        }
-
-        private void LogLaserShot() =>
-            _analyticsService.LogEvent(AnalyticsEventName.LASER_SHOTS);
-
-        private void OnShipDied() => LogEndGameEvent();
-
-        private void OnLaserShot() => LogLaserShot();
+        private void OnLaserShot() => _analyticsService.LogLaserShot();
     }
 }

@@ -19,12 +19,14 @@ namespace _Asteroids.Scripts.Core
         private readonly ShipFactory _shipFactory;
         private readonly ShipHolder _shipHolder;
         private readonly AnalyticsEventTracker _analyticsEventTracker;
+        private readonly IAnalyticsService _analyticsService;
         private readonly GameplayStatisticsUpdater _gameplayStatisticsUpdater;
         private Ship _ship;
         private Laser _laser;
         
         public EntryPoint(UIStatistics uiStatistics, Spawner spawner, InputController inputController,
-            ShipFactory shipFactory, ShipHolder shipHolder, AnalyticsEventTracker analyticsEventTracker, GameplayStatisticsUpdater gameplayStatisticsUpdater)
+            ShipFactory shipFactory, ShipHolder shipHolder, AnalyticsEventTracker analyticsEventTracker,
+            IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater)
         {
             _uiStatistics = uiStatistics;
             _spawner = spawner;
@@ -32,6 +34,7 @@ namespace _Asteroids.Scripts.Core
             _shipFactory = shipFactory;
             _shipHolder = shipHolder;
             _analyticsEventTracker = analyticsEventTracker;
+            _analyticsService = analyticsService;
             _gameplayStatisticsUpdater = gameplayStatisticsUpdater;
         }
 
@@ -53,7 +56,7 @@ namespace _Asteroids.Scripts.Core
         
         private void StartGame()
         {
-            _analyticsEventTracker.LogStartGameEvent();
+            _analyticsService.LogGameStart();
             _uiStatistics.Run();
             _spawner.Run();
         }
