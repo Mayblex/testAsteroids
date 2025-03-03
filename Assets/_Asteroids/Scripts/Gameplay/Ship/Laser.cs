@@ -17,12 +17,11 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         private bool _canCharge = true;
         private LaserConfig _config;
-        private IRemoteConfigService _configService;
 
         [Inject]
         public void Construct(IRemoteConfigService configService)
         {
-            _configService = configService;
+            _config = configService.GetValue<LaserConfig>(LASER_CONFIG);
         }
         
         public event Action NumberChanged;
@@ -33,7 +32,6 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         public void Initialize()
         {
-            _config = _configService.GetValue<LaserConfig>(LASER_CONFIG);
             _lifeTime = _config.LifeTime;
             _maxNumber = _config.MaxNumber;
             TimeRecharge = _config.TimeRecharge;

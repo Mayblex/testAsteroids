@@ -22,12 +22,11 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         private Vector2 _moveDirection;
         private float _rotationZ;
         private ShipConfig _config;
-        private IRemoteConfigService _configService;
         
         [Inject]
         public void Construct(IRemoteConfigService configService)
         {
-            _configService = configService;
+            _config = configService.GetValue<ShipConfig>(SHIP_CONFIG);
         }
         
         public event Action Died;
@@ -41,7 +40,6 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         public void Initialize()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _config = _configService.GetValue<ShipConfig>(SHIP_CONFIG);
             _moveSpeed = _config.MoveSpeed;
             _rotationSpeed = _config.RotationSpeed;
         }
