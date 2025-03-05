@@ -24,9 +24,10 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         private ShipConfig _config;
         
         [Inject]
-        public void Construct(IRemoteConfigService configService)
+        public void Construct(IRemoteConfigService configService, IAdsService adsService)
         {
             _config = configService.GetValue<ShipConfig>(SHIP_CONFIG);
+            adsService.OnRewardedAdCompleted += Respawn;
         }
         
         public event Action Died;

@@ -14,6 +14,7 @@ namespace _Asteroids.Scripts.Core
     public class EntryPoint : IInitializable, ITickable, IDisposable
     {
         private readonly UIStatistics _uiStatistics;
+        private readonly WindowGameOver _windowGameOver;
         private readonly Spawner _spawner;
         private readonly InputController _inputController;
         private readonly ShipFactory _shipFactory;
@@ -24,11 +25,12 @@ namespace _Asteroids.Scripts.Core
         private Ship _ship;
         private Laser _laser;
         
-        public EntryPoint(UIStatistics uiStatistics, Spawner spawner, InputController inputController,
+        public EntryPoint(UIStatistics uiStatistics, WindowGameOver windowGameOver,Spawner spawner, InputController inputController,
             ShipFactory shipFactory, ShipHolder shipHolder, AnalyticsEventTracker analyticsEventTracker,
             IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater)
         {
             _uiStatistics = uiStatistics;
+            _windowGameOver = windowGameOver;
             _spawner = spawner;
             _inputController = inputController;
             _shipFactory = shipFactory;
@@ -48,6 +50,7 @@ namespace _Asteroids.Scripts.Core
             _spawner.Initialize();
             _inputController.Initialize();
             _uiStatistics.Initialize();
+            _windowGameOver.Initialize();
             _analyticsEventTracker.Initialize();
             _gameplayStatisticsUpdater.Initialize();
             
