@@ -64,13 +64,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         public void Turn(float rotationZ) => 
             _rotationZ = rotationZ;
-        
-        private void MoveInternal()
-        {
-            _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
-            _rigidbody.angularVelocity = Vector3.forward * (_rotationZ * _rotationSpeed);
-        }
-        
+
         public void DefaultAtack()
         {
             Instantiate(_bulletPrefab, transform.position, transform.rotation);
@@ -87,6 +81,17 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         {
             Died?.Invoke();
             gameObject.SetActive(false);
+        }
+
+        private void MoveInternal()
+        {
+            _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
+            _rigidbody.angularVelocity = Vector3.forward * (_rotationZ * _rotationSpeed);
+        }
+
+        private void Respawn()
+        {
+            gameObject.SetActive(true);
         }
     }
 }
