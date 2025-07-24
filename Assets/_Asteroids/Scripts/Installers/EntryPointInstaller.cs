@@ -9,8 +9,7 @@ namespace _Asteroids.Scripts.Installers
         {
             Container.
                 BindInterfacesAndSelfTo<EntryPoint>().
-                AsCached().
-                NonLazy();
+                AsCached();
         }
     }
 }
