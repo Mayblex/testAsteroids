@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Asteroids.Scripts.Services
 {
-    public class FirebaseInitialize
+    public class FirebaseInitialize : IServiceInitialize
     {
         public async Task Initialize()
         {
