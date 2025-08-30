@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +23,12 @@ namespace _Asteroids.Scripts.Core
             _adsService = adsService;
         }
         
-        public async void Initialize()
+        public void Initialize()
+        {
+            InitializeAsync().Forget();
+        }
+        
+        private async UniTask InitializeAsync()
         {
             Debug.Log("Start");
 
@@ -30,7 +36,7 @@ namespace _Asteroids.Scripts.Core
             await _analyticsService.Initialize();
             await _configService.Initialize();
             await _adsService.Initialize();
-            
+
             _sceneLoader.LoadScene("MainScene");
         }
     }

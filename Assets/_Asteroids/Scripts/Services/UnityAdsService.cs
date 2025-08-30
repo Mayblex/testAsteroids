@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -16,7 +16,7 @@ namespace _Asteroids.Scripts.Services
         private bool _testMode = true;
         private string _gameId;
 
-        public async Task Initialize()
+        public async UniTask Initialize()
         {
 #if UNITY_ANDROID
             _gameId = _androidGameId;

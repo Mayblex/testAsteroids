@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using _Asteroids.Scripts.Data;
+﻿using _Asteroids.Scripts.Data;
+using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
 using Firebase.Extensions;
@@ -16,7 +16,7 @@ namespace _Asteroids.Scripts.Services
             _gameplayStatistics = gameplayStatistics;
         }
         
-        public async Task Initialize()
+        public async UniTask Initialize()
         {
             await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {

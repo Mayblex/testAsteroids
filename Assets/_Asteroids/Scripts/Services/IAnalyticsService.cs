@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 namespace _Asteroids.Scripts.Services
 {
     public interface IAnalyticsService
     {
-        Task Initialize();
+        UniTask Initialize();
         void LogGameStart();
         void LogGameOver();
         void LogLaserShot();

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 namespace _Asteroids.Scripts.Services
 {
     public interface IServiceInitialize
     {
-        Task Initialize();
+        UniTask Initialize();
     }
 }

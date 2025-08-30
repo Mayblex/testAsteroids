@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Extensions;
 using UnityEngine;
@@ -7,7 +7,7 @@ namespace _Asteroids.Scripts.Services
 {
     public class FirebaseInitialize : IServiceInitialize
     {
-        public async Task Initialize()
+        public async UniTask Initialize()
         {
             await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {

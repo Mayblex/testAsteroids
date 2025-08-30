@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace _Asteroids.Scripts.Services
 {
@@ -7,7 +7,7 @@ namespace _Asteroids.Scripts.Services
     {
         event Action OnRewardedAdCompleted;
         
-        Task Initialize();
+        UniTask Initialize();
         void LoadRewardedAd();
         void ShowRewardedAd();
         void LoadInterstitialAd();
