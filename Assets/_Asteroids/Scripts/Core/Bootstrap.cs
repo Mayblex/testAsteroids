@@ -33,9 +33,11 @@ namespace _Asteroids.Scripts.Core
             Debug.Log("Start");
 
             await _serviceInitialize.Initialize();
-            await _analyticsService.Initialize();
-            await _configService.Initialize();
-            await _adsService.Initialize();
+
+            await UniTask.WhenAll(
+                _analyticsService.Initialize(), 
+                _configService.Initialize(), 
+                _adsService.Initialize());
 
             _sceneLoader.LoadScene("MainScene");
         }
