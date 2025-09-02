@@ -3,7 +3,7 @@ using Zenject;
 
 namespace _Asteroids.Scripts.Installers.Services
 {
-    public class ServiceInitialize : MonoInstaller
+    public class ServiceInitializeInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
