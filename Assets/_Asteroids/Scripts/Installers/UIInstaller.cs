@@ -11,6 +11,11 @@ namespace _Asteroids.Scripts.Installers
                 Bind<UIStatistics>().
                 FromComponentInHierarchy().
                 AsSingle();
+            
+            Container.
+                Bind<WindowGameOver>().
+                FromComponentInHierarchy().
+                AsSingle();
         }
     }
 }
