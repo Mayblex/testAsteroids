@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Threading;
 using _Asteroids.Scripts.Configs;
-using _Asteroids.Scripts.Core;
 using _Asteroids.Scripts.Core.Factory;
 using _Asteroids.Scripts.Core.Pool;
 using _Asteroids.Scripts.Gameplay.Asteroids;
 using _Asteroids.Scripts.Installers;
 using _Asteroids.Scripts.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -23,23 +24,23 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         private readonly CustomObjectPool<AsteroidBase> _asteroidPool;
         private readonly CustomObjectPool<AsteroidBase> _fragmentAsteroidPool;
         private readonly CustomObjectPool<UFO> _ufoPool;
-        private readonly CoroutineRunner _coroutineRunner;
         private readonly IRemoteConfigService _configService;
+        
         private int _numberAsteroid = 3;
         private int _numberUFO = 1;
         private float _time = 25f;
         private float _deltaTime = 7f;
         private SpawnerConfig _config;
+        private CancellationTokenSource _cts;
         
         public Spawner([Inject(Id = InstallerIds.ASTEROID_FACTORY)] AsteroidFactory asteroidFactory,
             [Inject(Id = InstallerIds.FRAGMENT_ASTEROID_FACTORY)]
             AsteroidFactory fragmentAsteroidFactory,
-            UFOFactory ufoFactory, CoroutineRunner coroutineRunner, IRemoteConfigService configService)
+            UFOFactory ufoFactory, IRemoteConfigService configService)
         {
             _ufoPool = ufoFactory.GetPool();
             _asteroidPool = asteroidFactory.GetPool();
             _fragmentAsteroidPool = fragmentAsteroidFactory.GetPool();
-            _coroutineRunner = coroutineRunner;
             _configService = configService;
         }
 
@@ -54,15 +55,18 @@ namespace _Asteroids.Scripts.Gameplay.Spawn
         
         public void Run()
         {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            
             Spawn(_numberAsteroid, _numberUFO);
-            _coroutineRunner.StartRoutine(SpawnObjectsAfterTime());
+            SpawnObjectsAfterTime(_cts.Token).Forget();
         }
         
-        private IEnumerator SpawnObjectsAfterTime()
+        private async UniTaskVoid SpawnObjectsAfterTime(CancellationToken token)
         {
-            while (true)
+            while (!token.IsCancellationRequested)
             {
-                yield return new WaitForSeconds(_time);
+                await UniTask.Delay(TimeSpan.FromSeconds(_time), cancellationToken: token);
 
                 Spawn(_numberAsteroid, _numberUFO);
 
