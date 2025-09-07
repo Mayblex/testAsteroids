@@ -7,13 +7,14 @@ namespace _Asteroids.Scripts.Core
 {
     public class Bootstrap : IInitializable
     {
-        private readonly ZenjectSceneLoader _sceneLoader;
+        private readonly ISceneLoader _sceneLoader;
         private readonly IServiceInitialize _serviceInitialize;
         private readonly IAnalyticsService _analyticsService;
         private readonly IRemoteConfigService _configService;
         private readonly IAdsService _adsService;
-        
-        public Bootstrap(ZenjectSceneLoader sceneLoader, IServiceInitialize serviceInitialize, IAnalyticsService analyticsService, 
+
+        public Bootstrap(ISceneLoader sceneLoader, IServiceInitialize serviceInitialize,
+            IAnalyticsService analyticsService,
             IRemoteConfigService configService, IAdsService adsService)
         {
             _sceneLoader = sceneLoader;
@@ -22,12 +23,12 @@ namespace _Asteroids.Scripts.Core
             _configService = configService;
             _adsService = adsService;
         }
-        
+
         public void Initialize()
         {
             InitializeAsync().Forget();
         }
-        
+
         private async UniTask InitializeAsync()
         {
             Debug.Log("Start");
@@ -35,11 +36,11 @@ namespace _Asteroids.Scripts.Core
             await _serviceInitialize.Initialize();
 
             await UniTask.WhenAll(
-                _analyticsService.Initialize(), 
-                _configService.Initialize(), 
+                _analyticsService.Initialize(),
+                _configService.Initialize(),
                 _adsService.Initialize());
 
-            _sceneLoader.LoadScene("MainScene");
+            _sceneLoader.LoadGame();
         }
     }
 }
