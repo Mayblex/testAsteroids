@@ -6,6 +6,7 @@ using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
 using _Asteroids.Scripts.Services;
 using _Asteroids.Scripts.UI;
+using _Asteroids.Scripts.UI.Statistics;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +14,7 @@ namespace _Asteroids.Scripts.Core
 {
     public class EntryPoint : IInitializable, ITickable, IDisposable
     {
-        private readonly UIStatistics _uiStatistics;
+        private readonly StatisticsPresenter _statisticsPresenter;
         private readonly WindowGameOver _windowGameOver;
         private readonly Spawner _spawner;
         private readonly InputController _inputController;
@@ -25,11 +26,11 @@ namespace _Asteroids.Scripts.Core
         private Ship _ship;
         private Laser _laser;
         
-        public EntryPoint(UIStatistics uiStatistics, WindowGameOver windowGameOver,Spawner spawner, InputController inputController,
+        public EntryPoint(StatisticsPresenter statisticsPresenter, WindowGameOver windowGameOver,Spawner spawner, InputController inputController,
             ShipFactory shipFactory, ShipHolder shipHolder, AnalyticsEventTracker analyticsEventTracker,
             IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater)
         {
-            _uiStatistics = uiStatistics;
+            _statisticsPresenter = statisticsPresenter;
             _windowGameOver = windowGameOver;
             _spawner = spawner;
             _inputController = inputController;
@@ -49,7 +50,7 @@ namespace _Asteroids.Scripts.Core
             _laser.Initialize();
             _spawner.Initialize();
             _inputController.Initialize();
-            _uiStatistics.Initialize();
+            _statisticsPresenter.Initialize();
             _windowGameOver.Initialize();
             _analyticsEventTracker.Initialize();
             _gameplayStatisticsUpdater.Initialize();
@@ -60,14 +61,13 @@ namespace _Asteroids.Scripts.Core
         private void StartGame()
         {
             _analyticsService.LogGameStart();
-            _uiStatistics.Run();
             _spawner.Run();
         }
 
         public void Tick()
         {
             _inputController.ProcessInput();
-            _uiStatistics.UpdateText();
+            _statisticsPresenter.UpdateText();
         }
 
         public void Dispose()

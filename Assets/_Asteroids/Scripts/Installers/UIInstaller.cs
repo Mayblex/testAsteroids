@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.UI;
+using _Asteroids.Scripts.UI.Statistics;
 using Zenject;
 
 namespace _Asteroids.Scripts.Installers
@@ -8,13 +9,17 @@ namespace _Asteroids.Scripts.Installers
         public override void InstallBindings()
         {
             Container.
-                Bind<UIStatistics>().
-                FromComponentInHierarchy().
-                AsSingle();
-            
-            Container.
                 Bind<WindowGameOver>().
                 FromComponentInHierarchy().
+                AsSingle();
+
+            Container.
+                Bind<StatisticsView>().
+                FromComponentInHierarchy().
+                AsSingle();
+
+            Container.
+                Bind<StatisticsPresenter>().
                 AsSingle();
         }
     }
