@@ -6,7 +6,7 @@ using Zenject;
 
 namespace _Asteroids.Scripts.Core.Factory
 {
-    public class AsteroidFactory : IFactory
+    public class AsteroidFactory : IFactory<AsteroidBase>
     {
         private readonly GameObject _prefab;
         private readonly CustomObjectPool<AsteroidBase> _pool;
@@ -19,9 +19,9 @@ namespace _Asteroids.Scripts.Core.Factory
             _container = container;
         }
         
-        public GameObject Create(Vector2 position)
+        public AsteroidBase Create(Vector2 position)
         {
-            return _container.InstantiatePrefab(_prefab, position, Quaternion.identity, null);
+            return _container.InstantiatePrefabForComponent<AsteroidBase>(_prefab, position, Quaternion.identity, null);
         }
         
         public CustomObjectPool<AsteroidBase> GetPool() => _pool;

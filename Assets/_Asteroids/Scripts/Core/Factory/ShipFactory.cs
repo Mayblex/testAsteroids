@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Asteroids.Scripts.Core.Factory
 {
-    public class ShipFactory : IFactory
+    public class ShipFactory : IFactory<Ship>
     {
         private readonly GameObject _prefab;
         private readonly ShipHolder _shipHolder;
@@ -17,9 +17,9 @@ namespace _Asteroids.Scripts.Core.Factory
             _container = container;
         }
         
-        public GameObject Create(Vector2 position)
+        public Ship Create(Vector2 position)
         {
-            var instance = _container.InstantiatePrefab(_prefab, position, Quaternion.identity, null);
+            var instance = _container.InstantiatePrefabForComponent<Ship>(_prefab, position, Quaternion.identity, null);
             
             _container.Inject(instance);
             _shipHolder.SetShip(instance);

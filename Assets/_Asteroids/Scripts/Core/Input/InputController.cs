@@ -15,14 +15,14 @@ namespace _Asteroids.Scripts.Core.Input
             _shipHolder = shipHolder;
             
             _playerInput.Enable();
-            
-            _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
-            _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;
         }
 
         public void Initialize()
         {
             _inputHandler = _shipHolder.GetInputHandler();
+            
+            _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
+            _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;
         }
 
         public void ProcessInput()

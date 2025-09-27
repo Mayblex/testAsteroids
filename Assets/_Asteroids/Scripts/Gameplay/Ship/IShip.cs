@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Asteroids.Scripts.Gameplay.Ship
 {
-    public interface IReadonlyShip
+    public interface IShip
     {
         public event Action Died;
         

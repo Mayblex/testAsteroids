@@ -7,7 +7,7 @@ namespace _Asteroids.Scripts.UI.Statistics
     {
         private StatisticsView _view;
         private ShipHolder _shipHolder;
-        private IReadonlyShip _ship;
+        private IShip _ship;
         private Laser _laser;
 
         private float _currentTime;
@@ -20,7 +20,7 @@ namespace _Asteroids.Scripts.UI.Statistics
 
         public void Initialize()
         {
-            _ship = _shipHolder.GetReadonlyShip();
+            _ship = _shipHolder.GetShip();
             _laser = _shipHolder.GetLaser();
             
             _laser.NumberChanged += OnNumberChanged;

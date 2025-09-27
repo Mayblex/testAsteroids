@@ -9,15 +9,16 @@ using Zenject;
 namespace _Asteroids.Scripts.Gameplay.Ship
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Ship : MonoBehaviour, IInputHandler, IReadonlyShip, IDamageable
+    public class Ship : MonoBehaviour, IInputHandler, IShip, IDamageable
     {
         private const string SHIP_CONFIG = "shipConfig";
         
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
-        [SerializeField] private Laser _laser; 
-        
+        [SerializeField] private Laser _laser;
+
+        private IAdsService _adsService;
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
         private float _rotationZ;
@@ -27,7 +28,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         public void Construct(IRemoteConfigService configService, IAdsService adsService)
         {
             _config = configService.GetValue<ShipConfig>(SHIP_CONFIG);
-            adsService.OnRewardedAdCompleted += Respawn;
+            _adsService = adsService;
         }
         
         public event Action Died;
@@ -40,6 +41,8 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         public void Initialize()
         {
+            _adsService.OnRewardedAdCompleted += Respawn;
+            
             _rigidbody = GetComponent<Rigidbody>();
             _moveSpeed = _config.MoveSpeed;
             _rotationSpeed = _config.RotationSpeed;
@@ -54,7 +57,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
         
         private void FixedUpdate()
         {
-            MoveInternal();
+            Move();
         }
         
         private void OnCollisionEnter(Collision other) => 
@@ -84,7 +87,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
             gameObject.SetActive(false);
         }
 
-        private void MoveInternal()
+        private void Move()
         {
             _rigidbody.linearVelocity = _moveDirection * _moveSpeed;
             _rigidbody.angularVelocity = Vector3.forward * (_rotationZ * _rotationSpeed);

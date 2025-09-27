@@ -10,11 +10,11 @@ namespace _Asteroids.Scripts.Core.Pool
     public class CustomObjectPool<T> where T : Component
     {
         private readonly ObjectPool<T> _pool;
-        private readonly IFactory _factory;
+        private readonly IFactory<T> _factory;
         private readonly GameplayStatistics _gameplayStatistics;
         private Vector2 _position;
 
-        public CustomObjectPool(IFactory factory, int initialSize, GameplayStatistics gameplayStatistics)
+        public CustomObjectPool(IFactory<T> factory, int initialSize, GameplayStatistics gameplayStatistics)
         {
             _factory = factory;
             _pool = new ObjectPool<T>(OnCreateObject, OnGetObject, OnRelease, OnObjectDestroy, false,
@@ -49,7 +49,7 @@ namespace _Asteroids.Scripts.Core.Pool
 
         private T OnCreateObject()
         {
-            GameObject obj = _factory.Create(_position);
+            T obj = _factory.Create(_position);
 
             T component = obj.GetComponent<T>();
 

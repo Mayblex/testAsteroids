@@ -1,8 +1,5 @@
-﻿using _Asteroids.Scripts.Configs;
-using _Asteroids.Scripts.Core;
-using _Asteroids.Scripts.Services;
+﻿using _Asteroids.Scripts.Core;
 using UnityEngine;
-using Zenject;
 
 namespace _Asteroids.Scripts.Gameplay.Ship
 {

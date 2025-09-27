@@ -2,8 +2,8 @@
 
 namespace _Asteroids.Scripts.Core.Factory
 {
-    public interface IFactory
+    public interface IFactory<T>
     {
-        public GameObject Create(Vector2 position);
+        public T Create(Vector2 position);
     }
 }

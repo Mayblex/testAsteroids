@@ -10,6 +10,10 @@ namespace _Asteroids.Scripts.Installers.Data
             Container.
                 Bind<GameplayStatistics>().
                 AsSingle();
+            
+            Container.
+                Bind<GameplayStatisticsUpdater>().
+                AsSingle();
         }
     }
 }

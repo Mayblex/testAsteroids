@@ -73,6 +73,7 @@ namespace _Asteroids.Scripts.Core
         public void Dispose()
         {
             _inputController.Dispose();
+            _gameplayStatisticsUpdater.Dispose();
         }
     }
 }

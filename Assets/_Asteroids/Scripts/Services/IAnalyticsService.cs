@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using _Asteroids.Scripts.Data;
+using Cysharp.Threading.Tasks;
 
 namespace _Asteroids.Scripts.Services
 {
@@ -6,7 +7,7 @@ namespace _Asteroids.Scripts.Services
     {
         UniTask Initialize();
         void LogGameStart();
-        void LogGameOver();
+        void LogGameOver(GameplayStatistics statistics);
         void LogLaserShot();
     }
 }

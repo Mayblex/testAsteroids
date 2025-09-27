@@ -1250,7 +1250,7 @@ GameObject:
   - component: {fileID: 673763835}
   - component: {fileID: 673763836}
   m_Layer: 0
-  m_Name: GameplayStatisticsUpdaterInstaller
+  m_Name: GameplayStatisticsInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 673763833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46420ad39414427fa0badbd9dcfff9e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a824488bd894d26a06f9aa8694a255e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &685910669

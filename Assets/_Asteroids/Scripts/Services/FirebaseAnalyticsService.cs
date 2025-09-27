@@ -9,13 +9,6 @@ namespace _Asteroids.Scripts.Services
 {
     public class FirebaseAnalyticsService : IAnalyticsService
     {
-        private readonly GameplayStatistics _gameplayStatistics;
-
-        FirebaseAnalyticsService(GameplayStatistics gameplayStatistics)
-        {
-            _gameplayStatistics = gameplayStatistics;
-        }
-        
         public async UniTask Initialize()
         {
             await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
@@ -30,13 +23,13 @@ namespace _Asteroids.Scripts.Services
             FirebaseAnalytics.LogEvent(GAME_START);
         }
 
-        public void LogGameOver()
+        public void LogGameOver(GameplayStatistics statistics)
         {
             LogEvent(GAME_OVER,
-                (BULLET_SHOT, _gameplayStatistics.BulletShots),
-                (LASER_SHOTS, _gameplayStatistics.LaserShots),
-                (DESTROYED_ASTEROIDS, _gameplayStatistics.DestroyedAsteroids),
-                (DESTROYED_UFOS, _gameplayStatistics.DestroyedUFOs)
+                (BULLET_SHOT, statistics.BulletShots),
+                (LASER_SHOTS, statistics.LaserShots),
+                (DESTROYED_ASTEROIDS, statistics.DestroyedAsteroids),
+                (DESTROYED_UFOS, statistics.DestroyedUFOs)
             );
         }
 

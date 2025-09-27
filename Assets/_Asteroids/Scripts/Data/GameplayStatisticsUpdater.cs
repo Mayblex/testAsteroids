@@ -6,6 +6,7 @@ namespace _Asteroids.Scripts.Data
     {
         private readonly ShipHolder _shipHolder;
         private readonly GameplayStatistics _gameplayStatistics;
+        private Ship _ship;
 
         public GameplayStatisticsUpdater(ShipHolder shipHolder, GameplayStatistics gameplayStatistics)
         {
@@ -15,9 +16,15 @@ namespace _Asteroids.Scripts.Data
         
         public void Initialize()
         {
-            var ship = _shipHolder.Ship.GetComponent<Ship>();
-            ship.BulletShot += OnBulletShot;
-            ship.LaserShot += OnLaserShot;
+            _ship = _shipHolder.Ship.GetComponent<Ship>();
+            _ship.BulletShot += OnBulletShot;
+            _ship.LaserShot += OnLaserShot;
+        }
+
+        public void Dispose()
+        {
+            _ship.BulletShot -= OnBulletShot;
+            _ship.LaserShot -= OnLaserShot;
         }
 
         private void OnBulletShot()

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace _Asteroids.Scripts.Core.Factory
 {
-    public class UFOFactory : IFactory
+    public class UFOFactory : IFactory<UFO>
     {
         private readonly GameObject _ufoPrefab;
         private readonly Transform _target;
@@ -23,9 +23,9 @@ namespace _Asteroids.Scripts.Core.Factory
             _container = container;
         }
         
-        public GameObject Create(Vector2 position)
+        public UFO Create(Vector2 position)
         {
-            var instance = _container.InstantiatePrefab(_ufoPrefab, position, Quaternion.identity, null);
+            var instance = _container.InstantiatePrefabForComponent<UFO>(_ufoPrefab, position, Quaternion.identity, null);
             var ufo = instance.GetComponent<UFO>();
             ufo.SetTarget(_shipHolder.Ship.transform);
             return instance;

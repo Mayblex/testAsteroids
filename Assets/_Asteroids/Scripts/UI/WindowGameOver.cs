@@ -12,7 +12,7 @@ namespace _Asteroids.Scripts.UI
         
         private IAdsService _adsService;
         private ShipHolder _shipHolder;
-        private IReadonlyShip _ship;
+        private IShip _ship;
         private bool _hasWatchedRewarded = false;
 
         [Inject]
@@ -26,7 +26,7 @@ namespace _Asteroids.Scripts.UI
         {
             CloseWindowRewarded();
             CloseWindowFinish();
-            _ship = _shipHolder.GetReadonlyShip();
+            _ship = _shipHolder.GetShip();
             _ship.Died += ShowWindowRewarded;
         }
 
