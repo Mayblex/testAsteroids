@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 
 namespace _Asteroids.Scripts.Services
 {
-    public class UnityAdsService : IAdsService, IUnityAdsLoadListener, IUnityAdsShowListener
+    public class UnityAdsService : IAdsService, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
     {
         public event Action OnRewardedAdCompleted = delegate { };
         
@@ -15,21 +15,44 @@ namespace _Asteroids.Scripts.Services
         private const string INTERSTITIAL_AD = "Interstitial_Android";
         private bool _testMode = true;
         private string _gameId;
+        
+        private bool _initialized;
+        private UniTaskCompletionSource _initTcs;
 
         public async UniTask Initialize()
         {
 #if UNITY_ANDROID
-            _gameId = _androidGameId;
+            _gameId = NDROID_GAME_ID;
 #elif UNITY_EDITOR
             _gameId = TEST_GAME_ID;
 #endif
             if (!Advertisement.isInitialized && Advertisement.isSupported)
             {
-                Advertisement.Initialize(_gameId, _testMode);
+                _initialized = Advertisement.isInitialized;
+            }
+            else
+            {
+                _initTcs = new UniTaskCompletionSource();
+                Advertisement.Initialize(_gameId, _testMode, this);
+                await _initTcs.Task;
             }
             
             LoadRewardedAd();
             LoadInterstitialAd();
+        }
+        
+        public void OnInitializationComplete()
+        {
+            _initialized = true;
+            _initTcs?.TrySetResult();
+            Debug.Log("Unity Ads init complete");
+        }
+        
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+            _initialized = false;
+            _initTcs?.TrySetResult();
+            Debug.LogError($"Unity Ads init failed: {error} - {message}");
         }
 
         public void LoadRewardedAd() => 
@@ -46,30 +69,20 @@ namespace _Asteroids.Scripts.Services
         public void ShowInterstitialAd() => 
             Advertisement.Show(INTERSTITIAL_AD, this);
 
-        public void OnUnityAdsAdLoaded(string adUnitId)
-        {
+        public void OnUnityAdsAdLoaded(string adUnitId) => 
             Debug.Log("Ad loaded: " + adUnitId);
-        }
 
-        public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
-        {
+        public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message) => 
             Debug.LogError($"Failed to load Ad Unit {adUnitId}: {error} - {message}");
-        }
-        
-        public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
-        {
+
+        public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message) => 
             Debug.LogError($"Error showing Ad Unit {adUnitId}: {error} - {message}");
-        }
 
-        public void OnUnityAdsShowStart(string adUnitId)
-        {
+        public void OnUnityAdsShowStart(string adUnitId) => 
             Debug.Log("Ad started: " + adUnitId);
-        }
 
-        public void OnUnityAdsShowClick(string adUnitId)
-        {
+        public void OnUnityAdsShowClick(string adUnitId) => 
             Debug.Log("Ad clicked: " + adUnitId);
-        }
 
         public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
         {

@@ -15,27 +15,30 @@ namespace _Asteroids.Scripts.Core
     public class EntryPoint : IInitializable, ITickable, IDisposable
     {
         private readonly StatisticsPresenter _statisticsPresenter;
-        private readonly WindowGameOver _windowGameOver;
         private readonly Spawner _spawner;
         private readonly InputController _inputController;
         private readonly ShipFactory _shipFactory;
         private readonly ShipHolder _shipHolder;
+        private readonly UIFactory _uiFactory;
         private readonly AnalyticsEventTracker _analyticsEventTracker;
         private readonly IAnalyticsService _analyticsService;
         private readonly GameplayStatisticsUpdater _gameplayStatisticsUpdater;
         private Ship _ship;
         private Laser _laser;
+        private StatisticsView _statisticsView;
+        private WindowGameOver _windowGameOver;
         
-        public EntryPoint(StatisticsPresenter statisticsPresenter, WindowGameOver windowGameOver,Spawner spawner, InputController inputController,
-            ShipFactory shipFactory, ShipHolder shipHolder, AnalyticsEventTracker analyticsEventTracker,
+        public EntryPoint(StatisticsPresenter statisticsPresenter, Spawner spawner, 
+            InputController inputController, ShipFactory shipFactory, ShipHolder shipHolder, 
+            UIFactory uiFactory, AnalyticsEventTracker analyticsEventTracker,
             IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater)
         {
             _statisticsPresenter = statisticsPresenter;
-            _windowGameOver = windowGameOver;
             _spawner = spawner;
             _inputController = inputController;
             _shipFactory = shipFactory;
             _shipHolder = shipHolder;
+            _uiFactory = uiFactory;
             _analyticsEventTracker = analyticsEventTracker;
             _analyticsService = analyticsService;
             _gameplayStatisticsUpdater = gameplayStatisticsUpdater;
@@ -48,10 +51,16 @@ namespace _Asteroids.Scripts.Core
             _laser = _shipHolder.GetLaser();
             _ship.Initialize();
             _laser.Initialize();
+            
             _spawner.Initialize();
             _inputController.Initialize();
+            
+            _statisticsView = _uiFactory.CreateStatistics();
+            _windowGameOver = _uiFactory.CreateGameOver();
+            _statisticsPresenter.SetView(_statisticsView);
             _statisticsPresenter.Initialize();
             _windowGameOver.Initialize();
+            
             _analyticsEventTracker.Initialize();
             _gameplayStatisticsUpdater.Initialize();
             

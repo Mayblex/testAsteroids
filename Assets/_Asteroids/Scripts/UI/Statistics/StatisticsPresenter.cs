@@ -5,16 +5,16 @@ namespace _Asteroids.Scripts.UI.Statistics
 {
     public class StatisticsPresenter
     {
+        private readonly ShipHolder _shipHolder;
+        
         private StatisticsView _view;
-        private ShipHolder _shipHolder;
         private IShip _ship;
         private Laser _laser;
 
         private float _currentTime;
 
-        public StatisticsPresenter(StatisticsView view, ShipHolder shipHolder)
+        public StatisticsPresenter(ShipHolder shipHolder)
         {
-            _view = view;
             _shipHolder = shipHolder;
         }
 
@@ -30,6 +30,8 @@ namespace _Asteroids.Scripts.UI.Statistics
             UpdateNumberLaser(); 
             UpdateTimeRecharge();
         }
+        
+        public void SetView(StatisticsView view) => _view = view;
 
         public void UpdateText()
         {

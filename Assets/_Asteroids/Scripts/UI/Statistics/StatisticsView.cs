@@ -6,6 +6,7 @@ namespace _Asteroids.Scripts.UI.Statistics
 {
     public class StatisticsView : MonoBehaviour
     {
+        private const string TEXT_POSITION = "X, Y: ";
         private const string TEXT_SPEED = "Speed: ";
         private const string TEXT_ROTATION = "Rotation: ";
         private const string TEXT_NUMBER_LASER = "Laser: ";
@@ -18,7 +19,7 @@ namespace _Asteroids.Scripts.UI.Statistics
         [SerializeField] private TextMeshProUGUI _timeRecharge;
 
         public void SetPosition(string position) => 
-            _position.text = position;
+            _position.text = TEXT_POSITION + position;
 
         public void SetSpeed(string speed) => 
             _speed.text = TEXT_SPEED + speed;
