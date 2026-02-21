@@ -1,5 +1,6 @@
 ﻿using _Asteroids.Scripts.Data;
 using _Asteroids.Scripts.Gameplay.Statistics;
+using _Asteroids.Scripts.Services;
 using Zenject;
 
 namespace _Asteroids.Scripts.Installers.Data
@@ -14,6 +15,14 @@ namespace _Asteroids.Scripts.Installers.Data
             
             Container.
                 Bind<GameplayStatisticsUpdater>().
+                AsSingle();
+            
+            Container.
+                Bind<ScoreCalculator>().
+                AsSingle();
+            
+            Container.
+                Bind<RunResultService>().
                 AsSingle();
         }
     }
