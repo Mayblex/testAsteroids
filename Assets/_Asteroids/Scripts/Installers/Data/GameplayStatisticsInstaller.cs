@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Data;
+using _Asteroids.Scripts.Gameplay.Statistics;
 using Zenject;
 
 namespace _Asteroids.Scripts.Installers.Data
