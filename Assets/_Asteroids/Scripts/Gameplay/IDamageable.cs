@@ -1,4 +1,4 @@
-﻿namespace _Asteroids.Scripts.Core
+﻿namespace _Asteroids.Scripts.Gameplay
 {
     public interface IDamageable
     {
