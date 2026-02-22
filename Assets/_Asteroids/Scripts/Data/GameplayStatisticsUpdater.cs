@@ -16,7 +16,7 @@ namespace _Asteroids.Scripts.Data
         
         public void Initialize()
         {
-            _ship = _shipHolder.Ship.GetComponent<Ship>();
+            _ship = _shipHolder.Ship;
             _ship.BulletShot += OnBulletShot;
             _ship.LaserShot += OnLaserShot;
         }
