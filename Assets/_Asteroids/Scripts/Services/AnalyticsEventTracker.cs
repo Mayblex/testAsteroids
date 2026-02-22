@@ -18,8 +18,8 @@ namespace _Asteroids.Scripts.Services
 
         public void Initialize()
         {
-            _shipHolder.Ship.GetComponent<Ship>().Died += OnShipDied;
-            _shipHolder.Ship.GetComponent<Ship>().LaserShot += OnLaserShot;
+            _shipHolder.Ship.Died += OnShipDied;
+            _shipHolder.Ship.LaserShot += OnLaserShot;
         }
 
         private void OnShipDied() => _analyticsService.LogGameOver(_gameplayStatistics);

@@ -8,8 +8,10 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
     {
         private const string ASTEROID_CONFIG = "asteroidConfig";
         
-        private AsteroidConfig _config;
+        [SerializeField] private int fragmentCount = 2;
         
+        private AsteroidConfig _config;
+
         public event Action<GameObject, int, Vector3> Creating;
 
         private protected override void ApplyConfig()
@@ -20,12 +22,12 @@ namespace _Asteroids.Scripts.Gameplay.Asteroids
 
         private protected override void PerformOnDie()
         {
-            CreateFragment(2);
+            CreateFragment();
         }
         
-        private void CreateFragment(int number)
+        private void CreateFragment()
         {
-            Creating?.Invoke(gameObject, number, transform.position);
+            Creating?.Invoke(gameObject, fragmentCount, transform.position);
         }
     }
 }
