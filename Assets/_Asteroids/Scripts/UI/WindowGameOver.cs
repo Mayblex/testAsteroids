@@ -26,7 +26,7 @@ namespace _Asteroids.Scripts.UI
         {
             CloseWindowRewarded();
             CloseWindowFinish();
-            _ship = _shipHolder.GetShip();
+            _ship = _shipHolder.Ship;
             _ship.Died += ShowWindowRewarded;
         }
 

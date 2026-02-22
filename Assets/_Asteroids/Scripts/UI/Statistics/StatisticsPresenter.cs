@@ -20,8 +20,8 @@ namespace _Asteroids.Scripts.UI.Statistics
 
         public void Initialize()
         {
-            _ship = _shipHolder.GetShip();
-            _laser = _shipHolder.GetLaser();
+            _ship = _shipHolder.Ship;
+            _laser = _shipHolder.Laser;
             
             _laser.NumberChanged += OnNumberChanged;
             _laser.RechargeStarted += OnRechargeStarted;

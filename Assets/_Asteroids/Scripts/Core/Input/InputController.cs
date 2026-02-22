@@ -19,7 +19,7 @@ namespace _Asteroids.Scripts.Core.Input
 
         public void Initialize()
         {
-            _inputHandler = _shipHolder.GetInputHandler();
+            _inputHandler = _shipHolder.InputHandler;
             
             _playerInput.Gameplay.DefaultAtack.performed += OnDefaultAtackPerformed;
             _playerInput.Gameplay.SpecialAtack.performed += OnSpecialAtackPerformed;

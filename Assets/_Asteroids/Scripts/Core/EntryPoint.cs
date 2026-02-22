@@ -47,8 +47,8 @@ namespace _Asteroids.Scripts.Core
         public void Initialize()
         {
             _shipFactory.Create(Vector2.zero);
-            _laser = _shipHolder.GetLaser();
             _ship = _shipHolder.Ship;
+            _laser = _shipHolder.Laser;
             _ship.Initialize();
             _laser.Initialize();
             
