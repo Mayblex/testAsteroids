@@ -1,6 +1,7 @@
 ﻿using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Services;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace _Asteroids.Scripts.UI
     {
         [SerializeField] private GameObject _windowRewarded;
         [SerializeField] private GameObject _windowFinish;
+        [SerializeField] private TextMeshProUGUI _scoreText;
         
         private IAdsService _adsService;
         private ShipHolder _shipHolder;
@@ -49,7 +51,8 @@ namespace _Asteroids.Scripts.UI
             if (!_hasWatchedRewarded)
                 ShowInterstitialAd();
 
-            await _runResultService.FinalizeRunAndSave();
+            int finalScore = await _runResultService.FinalizeRunAndSave();
+            _scoreText.text = finalScore.ToString();
             
             ShowWindowFinish();
         }

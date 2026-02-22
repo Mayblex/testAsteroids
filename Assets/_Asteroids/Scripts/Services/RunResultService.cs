@@ -20,7 +20,7 @@ namespace _Asteroids.Scripts.Services
             _saveService = saveService;
         }
 
-        public async UniTask FinalizeRunAndSave()
+        public async UniTask<int> FinalizeRunAndSave()
         {
             int finalScore = _scoreCalculator.Calculate(_stats);
             
@@ -28,6 +28,8 @@ namespace _Asteroids.Scripts.Services
                 _saveData.BestScore = finalScore;
             
             await _saveService.Save(_saveData);
+            
+            return finalScore;
         }
     }
 }
