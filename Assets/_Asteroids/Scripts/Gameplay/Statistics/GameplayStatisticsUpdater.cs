@@ -21,7 +21,7 @@ namespace _Asteroids.Scripts.Gameplay.Statistics
         
         public void Initialize()
         {
-            _ship = _shipHolder.Ship.GetComponent<Ship.Ship>();
+            _ship = _shipHolder.Ship;
             _ship.BulletShot += OnBulletShot;
             _ship.LaserShot += OnLaserShot;
             
