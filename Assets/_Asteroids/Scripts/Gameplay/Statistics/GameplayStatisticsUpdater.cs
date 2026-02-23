@@ -1,12 +1,17 @@
-﻿using _Asteroids.Scripts.Gameplay.Ship;
+﻿using _Asteroids.Scripts.Data;
+using _Asteroids.Scripts.Gameplay.Ship;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
-namespace _Asteroids.Scripts.Data
+namespace _Asteroids.Scripts.Gameplay.Statistics
 {
     public class GameplayStatisticsUpdater
     {
         private readonly ShipHolder _shipHolder;
         private readonly GameplayStatistics _gameplayStatistics;
-        private Ship _ship;
+        
+        private Ship.Ship _ship;
+        private bool _running;
 
         public GameplayStatisticsUpdater(ShipHolder shipHolder, GameplayStatistics gameplayStatistics)
         {
@@ -19,10 +24,15 @@ namespace _Asteroids.Scripts.Data
             _ship = _shipHolder.Ship;
             _ship.BulletShot += OnBulletShot;
             _ship.LaserShot += OnLaserShot;
+            
+            _running = true;
+            TimerLoop().Forget();
         }
 
         public void Dispose()
         {
+            _running = false;
+            
             _ship.BulletShot -= OnBulletShot;
             _ship.LaserShot -= OnLaserShot;
         }
@@ -35,6 +45,16 @@ namespace _Asteroids.Scripts.Data
         private void OnLaserShot()
         {
             _gameplayStatistics.IncrementLaserShots();
+        }
+
+        private async UniTask TimerLoop()
+        {
+            while (_running)
+            {
+                await UniTask.Yield(PlayerLoopTiming.Update);
+                
+                _gameplayStatistics.AddPlayTime(Time.deltaTime);
+            }
         }
     }
 }
