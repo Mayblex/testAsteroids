@@ -4,6 +4,7 @@ using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Data;
 using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
+using _Asteroids.Scripts.Gameplay.Statistics;
 using _Asteroids.Scripts.Services;
 using _Asteroids.Scripts.UI;
 using _Asteroids.Scripts.UI.Statistics;
