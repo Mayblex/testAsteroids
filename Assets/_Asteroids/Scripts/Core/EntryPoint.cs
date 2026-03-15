@@ -7,8 +7,10 @@ using _Asteroids.Scripts.Gameplay.Spawn;
 using _Asteroids.Scripts.Gameplay.Statistics;
 using _Asteroids.Scripts.Services;
 using _Asteroids.Scripts.Services.Analytics;
+using _Asteroids.Scripts.Services.Assets;
 using _Asteroids.Scripts.UI;
 using _Asteroids.Scripts.UI.Statistics;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -25,15 +27,20 @@ namespace _Asteroids.Scripts.Core
         private readonly AnalyticsEventTracker _analyticsEventTracker;
         private readonly IAnalyticsService _analyticsService;
         private readonly GameplayStatisticsUpdater _gameplayStatisticsUpdater;
+        private readonly IAssetProvider _assetProvider;
+        private readonly AssetCatalogSO _assetCatalog;
+        
         private Ship _ship;
         private Laser _laser;
         private StatisticsView _statisticsView;
         private WindowGameOver _windowGameOver;
+        private bool _isReady;
         
         public EntryPoint(StatisticsPresenter statisticsPresenter, Spawner spawner, 
             InputController inputController, ShipFactory shipFactory, ShipHolder shipHolder, 
             UIFactory uiFactory, AnalyticsEventTracker analyticsEventTracker,
-            IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater)
+            IAnalyticsService analyticsService, GameplayStatisticsUpdater gameplayStatisticsUpdater, 
+            IAssetProvider assetProvider, AssetCatalogSO assetCatalog)
         {
             _statisticsPresenter = statisticsPresenter;
             _spawner = spawner;
@@ -44,9 +51,25 @@ namespace _Asteroids.Scripts.Core
             _analyticsEventTracker = analyticsEventTracker;
             _analyticsService = analyticsService;
             _gameplayStatisticsUpdater = gameplayStatisticsUpdater;
+            _assetProvider = assetProvider;
+            _assetCatalog = assetCatalog;
         }
 
         public void Initialize()
+        {
+            InitializeAsync().Forget();
+        }
+
+        private async UniTaskVoid InitializeAsync()
+        {
+            await _assetProvider.Warmup(_assetCatalog.GameplayWarpup);
+            
+            InitializeGame();
+            
+            _isReady = true;
+        }
+
+        private void InitializeGame()
         {
             _shipFactory.Create(Vector2.zero);
             _ship = _shipHolder.Ship;
@@ -68,15 +91,11 @@ namespace _Asteroids.Scripts.Core
             
             StartGame();
         }
-        
-        private void StartGame()
-        {
-            _analyticsService.LogGameStart();
-            _spawner.Run();
-        }
 
         public void Tick()
         {
+            if (!_isReady) return;
+            
             _inputController.ProcessInput();
             _statisticsPresenter.UpdateText();
         }
@@ -85,6 +104,13 @@ namespace _Asteroids.Scripts.Core
         {
             _inputController.Dispose();
             _gameplayStatisticsUpdater.Dispose();
+            _assetProvider.ReleaseAll();
+        }
+
+        private void StartGame()
+        {
+            _analyticsService.LogGameStart();
+            _spawner.Run();
         }
     }
 }
