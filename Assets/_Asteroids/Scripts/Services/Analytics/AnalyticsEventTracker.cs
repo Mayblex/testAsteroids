@@ -1,7 +1,7 @@
 ﻿using _Asteroids.Scripts.Data;
 using _Asteroids.Scripts.Gameplay.Ship;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.Analytics
 {
     public class AnalyticsEventTracker
     {

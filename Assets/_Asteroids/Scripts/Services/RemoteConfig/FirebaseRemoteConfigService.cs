@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
 using UnityEngine;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.RemoteConfig
 {
     public class FirebaseRemoteConfigService : IRemoteConfigService
     {

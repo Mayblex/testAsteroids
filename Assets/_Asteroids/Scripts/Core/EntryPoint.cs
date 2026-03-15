@@ -6,6 +6,7 @@ using _Asteroids.Scripts.Gameplay.Ship;
 using _Asteroids.Scripts.Gameplay.Spawn;
 using _Asteroids.Scripts.Gameplay.Statistics;
 using _Asteroids.Scripts.Services;
+using _Asteroids.Scripts.Services.Analytics;
 using _Asteroids.Scripts.UI;
 using _Asteroids.Scripts.UI.Statistics;
 using UnityEngine;

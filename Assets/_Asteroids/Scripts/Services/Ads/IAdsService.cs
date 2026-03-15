@@ -1,7 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.Ads
 {
     public interface IAdsService
     {

@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.SceneLoading
 {
     public class SceneLoader : ISceneLoader
     {
