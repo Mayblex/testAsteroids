@@ -12,5 +12,6 @@ EditorBuildSettings:
     path: Assets/_Asteroids/Scenes/MainScene.unity
     guid: 7caa234af910b9948a26642076a2db6f
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: c3266e4fe88b4a9469479a5869814c9e, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b83822a13a2d8fd42b37dc9c372a46aa, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Local Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: Local Prefabs
+  m_GUID: 56bba78065c9dac46a889f6025de53fa
+  m_SerializeEntries:
+  - m_GUID: 1303557a25b684648979991d34dba5f7
+    m_Address: Gameplay/Ship
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 310a1a7bf4edd6942a50c52de461b5bd
+    m_Address: Gameplay/UFO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a8c8bae8966a5d41889b5b0f858e176
+    m_Address: Gameplay/FragmentAsteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 510faea4fa966b3469caa9d4970d1c36
+    m_Address: UI/Statistics
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a39c4c0158455aa4493cd672799430fc
+    m_Address: UI/WindowsGameOver
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b55ab0ef9c85bf44b84eedc772342c90
+    m_Address: Gameplay/Bullet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b59bfe2be53e8df4fba20b0a23f31b67
+    m_Address: Gameplay/Asteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 820bf4be9ae12b84ba42c5f22bf1d7a2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 825ceb1dee9739648a6840294c9823c0, type: 2}
+    - {fileID: 11400000, guid: 74162c147fe965a4db129e511992df9f, type: 2}
