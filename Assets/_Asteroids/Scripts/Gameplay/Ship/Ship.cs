@@ -4,6 +4,7 @@ using _Asteroids.Scripts.Core;
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Services;
 using _Asteroids.Scripts.Services.Ads;
+using _Asteroids.Scripts.Services.Assets;
 using _Asteroids.Scripts.Services.RemoteConfig;
 using UnityEngine;
 using Zenject;
@@ -15,22 +16,26 @@ namespace _Asteroids.Scripts.Gameplay.Ship
     {
         private const string SHIP_CONFIG = "shipConfig";
         
-        [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private float _rotationSpeed = 5f;
         [SerializeField] private Laser _laser;
 
         private IAdsService _adsService;
+        private IAssetProvider _assetProvider;
+        private AssetCatalogSO _catalog;
         private Rigidbody _rigidbody;
         private Vector2 _moveDirection;
         private float _rotationZ;
         private ShipConfig _config;
         
         [Inject]
-        public void Construct(IRemoteConfigService configService, IAdsService adsService)
+        public void Construct(IRemoteConfigService configService, IAdsService adsService, IAssetProvider assetProvider, 
+            AssetCatalogSO catalog)
         {
             _config = configService.GetValue<ShipConfig>(SHIP_CONFIG);
             _adsService = adsService;
+            _assetProvider = assetProvider;
+            _catalog = catalog;
         }
         
         public event Action Died;
@@ -73,7 +78,8 @@ namespace _Asteroids.Scripts.Gameplay.Ship
 
         public void DefaultAtack()
         {
-            Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            var bulletPrefab = _assetProvider.GetLoaded<GameObject>(_catalog.BulletPrefab);
+            Instantiate(bulletPrefab, transform.position, transform.rotation);
             BulletShot?.Invoke();
         }
 

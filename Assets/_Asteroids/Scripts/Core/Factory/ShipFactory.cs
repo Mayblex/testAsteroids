@@ -1,4 +1,5 @@
 ﻿using _Asteroids.Scripts.Gameplay.Ship;
+using _Asteroids.Scripts.Services.Assets;
 using UnityEngine;
 using Zenject;
 
@@ -6,20 +7,23 @@ namespace _Asteroids.Scripts.Core.Factory
 {
     public class ShipFactory : IFactory<Ship>
     {
-        private readonly GameObject _prefab;
+        private readonly IAssetProvider _assetProvider;
+        private readonly string _prefabAddress;
         private readonly ShipHolder _shipHolder;
         private readonly DiContainer _container;
         
-        public ShipFactory(GameObject prefab, ShipHolder shipHolder, DiContainer container)
+        public ShipFactory(IAssetProvider assetProvider, string prefabAddress, ShipHolder shipHolder, DiContainer container)
         {
-            _prefab = prefab;
+            _assetProvider = assetProvider;
+            _prefabAddress = prefabAddress;
             _shipHolder = shipHolder;
             _container = container;
         }
         
         public Ship Create(Vector2 position)
         {
-            var instance = _container.InstantiatePrefabForComponent<Ship>(_prefab, position, Quaternion.identity, null);
+            var prefab = _assetProvider.GetLoaded<GameObject>(_prefabAddress);
+            var instance = _container.InstantiatePrefabForComponent<Ship>(prefab, position, Quaternion.identity, null);
             
             _container.Inject(instance);
             _shipHolder.SetShip(instance);

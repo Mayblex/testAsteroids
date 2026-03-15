@@ -9,14 +9,12 @@ namespace _Asteroids.Scripts.Installers
     public class UIInstaller : MonoInstaller
     {
         [SerializeField] private RectTransform _uiRoot;
-        [SerializeField] private StatisticsView _uiStatisticsPrefab;
-        [SerializeField] private WindowGameOver _uiGameOverPrefab;
         
         public override void InstallBindings()
         {
             Container.Bind<UIFactory>()
                 .AsSingle()
-                .WithArguments(_uiRoot, Container, _uiGameOverPrefab, _uiStatisticsPrefab);
+                .WithArguments(_uiRoot, Container);
 
             Container.Bind<StatisticsPresenter>().AsSingle();
         }

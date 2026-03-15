@@ -1,4 +1,5 @@
-﻿using _Asteroids.Scripts.UI;
+﻿using _Asteroids.Scripts.Services.Assets;
+using _Asteroids.Scripts.UI;
 using _Asteroids.Scripts.UI.Statistics;
 using UnityEngine;
 using Zenject;
@@ -9,22 +10,30 @@ namespace _Asteroids.Scripts.Core.Factory
     {
         private readonly RectTransform _uiRoot;
         private readonly DiContainer _container;
-        private readonly WindowGameOver _gameOverPrefab;
-        private readonly StatisticsView _statisticsPrefab;
+        private readonly IAssetProvider _assetProvider;
+        private readonly AssetCatalogSO _catalog;
         
-        public UIFactory(RectTransform uiRoot, DiContainer container, WindowGameOver gameOverPrefab,
-            StatisticsView statisticsPrefab)
+        public UIFactory(RectTransform uiRoot, DiContainer container, IAssetProvider assetProvider,
+            AssetCatalogSO catalog)
         {
             _uiRoot = uiRoot;
             _container = container;
-            _gameOverPrefab = gameOverPrefab;
-            _statisticsPrefab = statisticsPrefab;
+            _assetProvider = assetProvider;
+            _catalog = catalog;
         }
         
         public WindowGameOver CreateGameOver()
-            => _container.InstantiatePrefabForComponent<WindowGameOver>(_gameOverPrefab, _uiRoot);
+        {
+            var prefab = _assetProvider.GetLoaded<GameObject>(_catalog.WindowGameOverPrefab);
+            
+            return _container.InstantiatePrefabForComponent<WindowGameOver>(prefab, _uiRoot);
+        }
 
         public StatisticsView CreateStatistics()
-            => _container.InstantiatePrefabForComponent<StatisticsView>(_statisticsPrefab, _uiRoot);
+        {
+            var prefab = _assetProvider.GetLoaded<GameObject>(_catalog.UIStatisticsPrefab);
+            
+            return _container.InstantiatePrefabForComponent<StatisticsView>(prefab, _uiRoot);
+        }
     }
 }
