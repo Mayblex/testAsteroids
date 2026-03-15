@@ -7,7 +7,6 @@ namespace _Asteroids.Scripts.Services.Save
     {
         SaveData Load();
         UniTask Save(SaveData data);
-        bool HasSave();
         void Clear();
     }
 }

@@ -11,11 +11,6 @@ namespace _Asteroids.Scripts.Services.Save
         
         public SaveData Load()
         {
-            if (!HasSave())
-            {
-                return CreateDefault();
-            }
-            
             var json = PlayerPrefs.GetString(KEY, string.Empty);
 
             if (string.IsNullOrEmpty(json))
@@ -39,8 +34,6 @@ namespace _Asteroids.Scripts.Services.Save
             
             return UniTask.CompletedTask;
         }
-
-        public bool HasSave() => PlayerPrefs.HasKey(KEY);
 
         public void Clear()
         {
