@@ -6,6 +6,7 @@ using _Asteroids.Scripts.Core.Pool;
 using _Asteroids.Scripts.Gameplay.Asteroids;
 using _Asteroids.Scripts.Installers;
 using _Asteroids.Scripts.Services;
+using _Asteroids.Scripts.Services.RemoteConfig;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;

@@ -1,4 +1,4 @@
-﻿namespace _Asteroids.Scripts.Services
+﻿namespace _Asteroids.Scripts.Services.Analytics
 {
     public class AnalyticsEventName
     {

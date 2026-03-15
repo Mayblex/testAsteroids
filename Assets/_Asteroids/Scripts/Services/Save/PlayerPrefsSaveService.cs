@@ -1,9 +1,9 @@
-﻿using _Asteroids.Scripts.Data;
+﻿using System;
+using _Asteroids.Scripts.Data;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using System;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.Save
 {
     public class PlayerPrefsSaveService : ISaveService
     {
@@ -11,11 +11,6 @@ namespace _Asteroids.Scripts.Services
         
         public SaveData Load()
         {
-            if (!HasSave())
-            {
-                return CreateDefault();
-            }
-            
             var json = PlayerPrefs.GetString(KEY, string.Empty);
 
             if (string.IsNullOrEmpty(json))
@@ -40,8 +35,6 @@ namespace _Asteroids.Scripts.Services
             return UniTask.CompletedTask;
         }
 
-        public bool HasSave() => PlayerPrefs.HasKey(KEY);
-
         public void Clear()
         {
             PlayerPrefs.DeleteKey(KEY);
@@ -51,6 +44,6 @@ namespace _Asteroids.Scripts.Services
         private static SaveData CreateDefault() =>
             new SaveData { SaveAtUnix = NowUnix() };
         
-        private static long NowUnix() => DateTimeOffset.Now.ToUnixTimeSeconds();
+        private static long NowUnix() => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     }
 }

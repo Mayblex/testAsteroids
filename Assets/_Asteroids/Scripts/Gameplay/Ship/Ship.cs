@@ -3,6 +3,8 @@ using _Asteroids.Scripts.Configs;
 using _Asteroids.Scripts.Core;
 using _Asteroids.Scripts.Core.Input;
 using _Asteroids.Scripts.Services;
+using _Asteroids.Scripts.Services.Ads;
+using _Asteroids.Scripts.Services.RemoteConfig;
 using UnityEngine;
 using Zenject;
 

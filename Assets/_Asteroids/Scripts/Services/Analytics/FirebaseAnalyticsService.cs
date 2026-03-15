@@ -3,9 +3,9 @@ using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
 using Firebase.Extensions;
-using static _Asteroids.Scripts.Services.AnalyticsEventName;
+using static _Asteroids.Scripts.Services.Analytics.AnalyticsEventName;
 
-namespace _Asteroids.Scripts.Services
+namespace _Asteroids.Scripts.Services.Analytics
 {
     public class FirebaseAnalyticsService : IAnalyticsService
     {
