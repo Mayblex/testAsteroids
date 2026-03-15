@@ -848,6 +848,7 @@ Transform:
   - {fileID: 2130099898}
   - {fileID: 1947083839}
   - {fileID: 673763835}
+  - {fileID: 1090337275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &859775681
@@ -865,6 +866,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 610076999}
+  - {fileID: 1090337274}
   - {fileID: 2130099899}
   - {fileID: 1947083838}
   - {fileID: 673763836}
@@ -886,6 +888,51 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!1 &1090337273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1090337275}
+  - component: {fileID: 1090337274}
+  m_Layer: 0
+  m_Name: AssetProviderInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1090337274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090337273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433c65bacdd54b60874bfe22ffa2117a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _assetCatalog: {fileID: 11400000, guid: a4ded275bdaf93143aa724f6101d6919, type: 2}
+--- !u!4 &1090337275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090337273}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 859775680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698145065
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,8 +978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipPrefab: {fileID: 3884115620029438690, guid: 1303557a25b684648979991d34dba5f7, type: 3}
-  _asteroidPrefab: {fileID: 7306217542560880922, guid: b59bfe2be53e8df4fba20b0a23f31b67, type: 3}
-  _fragmentasteroidPrefab: {fileID: 3853676829029392778, guid: 3a8c8bae8966a5d41889b5b0f858e176, type: 3}
   _initialSizeAsteroid: 15
   _initialSizeFragmentAsteroid: 22
   _ufoPrefub: {fileID: 5989484671766060907, guid: 310a1a7bf4edd6942a50c52de461b5bd, type: 3}
