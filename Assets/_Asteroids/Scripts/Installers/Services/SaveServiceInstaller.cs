@@ -14,8 +14,7 @@ namespace _Asteroids.Scripts.Installers.Services
                 AsSingle();
 
             Container.
-                Bind<SaveData>().
-                FromMethod(ctx => ctx.Container.Resolve<ISaveService>().Load()).
+                BindInterfacesAndSelfTo<SaveState>().
                 AsSingle();
         }
     }

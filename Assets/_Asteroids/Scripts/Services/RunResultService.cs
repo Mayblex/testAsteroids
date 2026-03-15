@@ -8,15 +8,15 @@ namespace _Asteroids.Scripts.Services
     {
         private readonly GameplayStatistics _stats;
         private readonly ScoreCalculator _scoreCalculator;
-        private readonly SaveData _saveData;
+        private readonly SaveState _saveState;
         private readonly ISaveService _saveService;
         
         public RunResultService(GameplayStatistics stats, ScoreCalculator scoreCalculator, 
-            SaveData saveData, ISaveService saveService)
+            SaveState saveState, ISaveService saveService)
         {
             _stats = stats;
             _scoreCalculator = scoreCalculator;
-            _saveData = saveData;
+            _saveState = saveState;
             _saveService = saveService;
         }
 
@@ -24,10 +24,10 @@ namespace _Asteroids.Scripts.Services
         {
             int finalScore = _scoreCalculator.Calculate(_stats);
             
-            if (finalScore > _saveData.BestScore)
-                _saveData.BestScore = finalScore;
+            if (finalScore > _saveState.Data.BestScore)
+                _saveState.Data.BestScore = finalScore;
             
-            await _saveService.Save(_saveData);
+            await _saveService.Save(_saveState.Data);
             
             return finalScore;
         }
