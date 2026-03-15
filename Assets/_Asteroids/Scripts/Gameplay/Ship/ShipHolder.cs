@@ -15,11 +15,5 @@ namespace _Asteroids.Scripts.Gameplay.Ship
             Laser = ship.GetComponentInChildren<Laser>();
             InputHandler = ship.GetComponent<IInputHandler>();
         }
-
-        public IInputHandler GetInputHandler() => 
-            Ship.GetComponent<IInputHandler>();
-
-        public Laser GetLaser() => 
-            Ship.GetComponentInChildren<Laser>();
     }
 }
