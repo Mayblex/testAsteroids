@@ -25,7 +25,7 @@ namespace _Asteroids.Scripts.Core.Factory
         
         public AsteroidBase Create(Vector2 position)
         {
-            var prefab = _assetProvider.GetLoaded<GameObject>(_prefabAddress);
+            var prefab = _assetProvider.GetLoadedComponent<AsteroidBase>(_prefabAddress);
             
             return _container.InstantiatePrefabForComponent<AsteroidBase>(prefab, position, Quaternion.identity, null);
         }

@@ -11,10 +11,8 @@ namespace _Asteroids.Scripts.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject _shipPrefab;
         [SerializeField] private int _initialSizeAsteroid = 15;
         [SerializeField] private int _initialSizeFragmentAsteroid = 22;
-        [SerializeField] private GameObject _ufoPrefub;
         [SerializeField] private int _initialSize;
         
         private AssetCatalogSO _catalog;

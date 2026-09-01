@@ -67,7 +67,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
             Move();
         }
         
-        private void OnCollisionEnter(Collision other) => 
+        private void OnCollisionEnter() => 
             TakeDamage();
         
         public void MoveForward(float input) => 
@@ -78,7 +78,7 @@ namespace _Asteroids.Scripts.Gameplay.Ship
 
         public void DefaultAtack()
         {
-            var bulletPrefab = _assetProvider.GetLoaded<GameObject>(_catalog.BulletPrefab);
+            var bulletPrefab = _assetProvider.GetLoadedComponent<Bullet>(_catalog.BulletPrefab);
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             BulletShot?.Invoke();
         }

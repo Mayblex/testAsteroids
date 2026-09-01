@@ -8,7 +8,7 @@ namespace _Asteroids.Scripts.Installers
         public override void InstallBindings()
         {
             Container.
-                BindInterfacesAndSelfTo<Bootstrap>().
+                BindInterfacesTo<Bootstrap>().
                 AsSingle();
         }
     }

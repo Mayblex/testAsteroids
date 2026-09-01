@@ -29,7 +29,7 @@ namespace _Asteroids.Scripts.Core.Factory
         
         public UFO Create(Vector2 position)
         {
-            var prefab = _assetProvider.GetLoaded<GameObject>(_prefabAddress);
+            var prefab = _assetProvider.GetLoadedComponent<UFO>(_prefabAddress);
             
             var instance = _container.InstantiatePrefabForComponent<UFO>(prefab, position, Quaternion.identity, null);
             var ufo = instance.GetComponent<UFO>();

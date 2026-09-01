@@ -14,7 +14,6 @@ namespace _Asteroids.Scripts.Services.Analytics
             await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
                 FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-                var app = FirebaseApp.DefaultInstance;
             });
         }
 

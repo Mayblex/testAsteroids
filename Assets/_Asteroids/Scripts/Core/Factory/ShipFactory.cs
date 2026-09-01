@@ -22,7 +22,7 @@ namespace _Asteroids.Scripts.Core.Factory
         
         public Ship Create(Vector2 position)
         {
-            var prefab = _assetProvider.GetLoaded<GameObject>(_prefabAddress);
+            var prefab = _assetProvider.GetLoadedComponent<Ship>(_prefabAddress);
             var instance = _container.InstantiatePrefabForComponent<Ship>(prefab, position, Quaternion.identity, null);
             
             _container.Inject(instance);

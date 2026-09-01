@@ -13,7 +13,6 @@ namespace _Asteroids.Scripts.Services
             {
                 if (task.IsCompleted)
                 {
-                    FirebaseApp app = FirebaseApp.DefaultInstance;
                     Debug.Log("Firebase initialized successfully.");
                 }
                 else
