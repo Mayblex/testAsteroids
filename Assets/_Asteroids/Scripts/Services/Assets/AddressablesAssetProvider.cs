@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -9,7 +10,7 @@ namespace _Asteroids.Scripts.Services.Assets
     {
         private readonly Dictionary<string, AsyncOperationHandle> _cache = new();
         
-        public async UniTask<T> LoadAssetAsync<T>(string address) where T : class
+        public async UniTask<T> LoadAssetAsync<T>(string address) where T : Object
         {
             if (_cache.TryGetValue(address, out var existing))
                 return existing.Result as T;
@@ -26,18 +27,17 @@ namespace _Asteroids.Scripts.Services.Assets
 
             for (int i = 0; i < addresses.Length; i++)
             {
-                tasks[i] = LoadAssetAsync<object>(addresses[i]);
+                tasks[i] = LoadAssetAsync<GameObject>(addresses[i]);
             }
             
             await UniTask.WhenAll(tasks);
         }
 
-        public T GetLoaded<T>(string address) where T : class
+        public T GetLoadedComponent<T>(string address) where T : Component
         {
-            if (!_cache.TryGetValue(address, out var handle))
-                throw new System.InvalidOperationException($"Asset not loaded (warmup missing?): '{address}'");
+            var prefab = (GameObject)_cache[address].Result;
             
-            return handle.Result as T;
+            return prefab.GetComponent<T>();
         }
 
         public void Release(string address)

@@ -24,14 +24,14 @@ namespace _Asteroids.Scripts.Core.Factory
         
         public WindowGameOver CreateGameOver()
         {
-            var prefab = _assetProvider.GetLoaded<GameObject>(_catalog.WindowGameOverPrefab);
+            var prefab = _assetProvider.GetLoadedComponent<WindowGameOver>(_catalog.WindowGameOverPrefab);
             
             return _container.InstantiatePrefabForComponent<WindowGameOver>(prefab, _uiRoot);
         }
 
         public StatisticsView CreateStatistics()
         {
-            var prefab = _assetProvider.GetLoaded<GameObject>(_catalog.UIStatisticsPrefab);
+            var prefab = _assetProvider.GetLoadedComponent<StatisticsView>(_catalog.UIStatisticsPrefab);
             
             return _container.InstantiatePrefabForComponent<StatisticsView>(prefab, _uiRoot);
         }
